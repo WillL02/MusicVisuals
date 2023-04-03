@@ -1,14 +1,16 @@
 package C21379483;
 
+import ie.tudublin.*;
+
+import javax.swing.plaf.synth.ColorType;
+
 import ddf.minim.AudioBuffer;
-import ddf.minim.AudioInput;
 import ddf.minim.AudioPlayer;
 import ddf.minim.analysis.*;
-import processing.core.PApplet;
 import processing.core.PImage;
 import ddf.minim.Minim;
 
-public class SafeAndSound extends PApplet {
+public class SafeAndSound extends Visual {
 
     PImage windowsxp;
 
@@ -22,9 +24,11 @@ public class SafeAndSound extends PApplet {
 
     float angle;
 
+    public void settings() {
+        size(1920, 1280);
+    }
+
     public void setup() {
-        size(1920, 1280, P3D);
-        // fullScreen(P3D);
         windowsxp = loadImage("windowsxp.png");
 
         colorMode(HSB);
@@ -87,7 +91,7 @@ public class SafeAndSound extends PApplet {
                 stroke(255 - y % 10);
                 strokeWeight(10);
                 fill(255 - y * 10, 255 - y, 255 - y);
-                scale(0.95);
+                scale(0.95f);
                 rotate(radians(angle));
                 rect(0, 0, 580, 580);
             }
@@ -107,7 +111,7 @@ void startLoad() {
   for (int i = 0; i < 10000; i++) {
     float x = random(width);
     float y = random(height);
-    color c = windowsxp.get(int(x), int(y));
+    int c = windowsxp.get((int)x, (int)y);
     fill(c, 25);
     noStroke();
     ellipse(x, y, 6, 6);

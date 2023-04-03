@@ -21,15 +21,15 @@ public class Main
         processing.core.PApplet.runSketch( a, new Heathens());		
 	}
 
-	public void testUI()
+	public void SafeAndSound()
 	{
 		String[] a = {"MAIN"};
-        processing.core.PApplet.runSketch( a, new Test());		
+        processing.core.PApplet.runSketch( a, new C21379483.SafeAndSound());		
 	}
 
 	public static void main(String[] args)
 	{
 		Main main = new Main();
-		main.startUI();
+		main.SafeAndSound();
 	}
 }
