@@ -4,9 +4,11 @@ import ddf.minim.AudioBuffer;
 import ddf.minim.AudioInput;
 import ddf.minim.AudioPlayer;
 import ddf.minim.analysis.*;
+import processing.core.PApplet;
+import processing.core.PImage;
 import ddf.minim.Minim;
 
-public class SafeAndSound extends Visual {
+public class SafeAndSound extends PApplet {
 
     PImage windowsxp;
 
@@ -20,7 +22,7 @@ public class SafeAndSound extends Visual {
 
     float angle;
 
-    void setup() {
+    public void setup() {
         size(1920, 1280, P3D);
         // fullScreen(P3D);
         windowsxp = loadImage("windowsxp.png");
@@ -45,7 +47,7 @@ public class SafeAndSound extends Visual {
         rectMode(CENTER);
     }
 
-    void draw() {
+    public void draw() {
         if (frameCount < 300) { // Should be 300
             startLoad();
         } else {
