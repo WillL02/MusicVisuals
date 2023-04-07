@@ -12,7 +12,7 @@ Name: Ciaran Cruz
 
 Student Number: C21318233
 
-Name: William Anmar Saoud
+Name: Anmar Saoud
 
 Student Number: C21402094
 
