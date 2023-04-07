@@ -10,20 +10,26 @@ import ddf.minim.Minim;
 
 public class SafeAndSound extends Visual {
 
+  // Declaring Variables
   Minim minim;
   AudioPlayer song;
   AudioBuffer ab;
   FFT fft;
 
+  //Declaring images
   PImage windowsxp;
   PImage windowsxp2;
   PImage exit;
+
+  //Declaring the 5 mouse curser images and making 12 mouse objects
   PImage[] mice = new PImage[5];
   Mouse[] mouses = new Mouse[12];
 
+  //Program starts with 1 mouse and goes up to 12
   int mouseNum = 1;
   int maxMice = 12;
 
+  //The rotation used for all the objects in the program
   float angle, lerpedAverage = 0;
 
   public void settings() {
@@ -52,6 +58,8 @@ public class SafeAndSound extends Visual {
       mice[i] = loadImage("mouse" + y + ".png");
     }
 
+    //Creating mouse objects, with random size between 85,130
+    //And passing this file onto Mouse class using "this"
     for (int i = 0; i < mouses.length; i++) {
       int index = (int) (random(0, mice.length));
       mouses[i] = new Mouse(mice[index], random(85, 130), this);
@@ -59,14 +67,15 @@ public class SafeAndSound extends Visual {
   }
 
   public void draw() {
+    //Start of the program
     if (frameCount < 245) {
       startLoad();
-    } else {
+    } else { // Load-up is done, now actual visual starts
       loadPicture();
       exitIcon("Exit", width - 120, height - 120);
       exitIconHover();
 
-      if (song.isPlaying()) {
+      if (song.isPlaying()) { // Makes it so when the song finishes, they dissapear
         pushMatrix();
         mouseFunct();
         popMatrix();
@@ -81,7 +90,7 @@ public class SafeAndSound extends Visual {
   }
 
   void startLoad() {
-    // image(windowsxp,0,0);
+    //Load in effect, with 10,000 dots drawing a second
     for (int i = 0; i < 10000; i++) {
       float x = random(width);
       float y = random(height);
@@ -93,26 +102,27 @@ public class SafeAndSound extends Visual {
   }
 
   void loadPicture() {
+    //Loads the background for the main part of the program
     image(windowsxp2, 0, 0);
   }
 
   void mouseFunct() {
+    //Gets the rotation and movement for the mouse
     float total = 0;
     for (int i = 0; i < ab.size(); i++) {
       total += abs(ab.get(i));
     }
     float average = total / (float) ab.size();
     lerpedAverage = lerp(lerpedAverage, average, 0.1f);
+
     // Mouse images functionality added
     for (int i = 0; i < mouseNum; i++) {
       mouses[i].move(lerpedAverage);
       mouses[i].rotates(lerpedAverage);
-
       mouses[i].display();
-
       mouses[i].side();
     }
-
+    // Adds a new mouse every 100 frames until there's 12, so they don't spawn at once
     if (frameCount % 100 == 0 && mouseNum < maxMice) {
       mouseNum++;
     }
@@ -178,20 +188,20 @@ public class SafeAndSound extends Visual {
 
   void exitIconHover() {
     if (mouseX > width - 140 && mouseX < width - 20 && mouseY > height - 130 && mouseY < height - 20) {
-      cursor(HAND);
+      cursor(HAND); // Changes the curser when hovering over the icon
       noStroke();
       fill(49, 182, 255, 65);
       rect(width - 92, height - 85, 100, 100);
-
+      // Exits the program if EXIT icon is pressed
       if (mousePressed) {
         song.pause();
         minim.stop();
         exit();
       }
     } else {
-      cursor(ARROW);
+      cursor(ARROW); // Default curser everywhere else
     }
-
+    // If the moving mouse hovers over the exit icon, it draws retangle too
     for (int i = 0; i < maxMice; i++) {
       float mouseXPos = mouses[i].getX();
       float mouseYPos = mouses[i].getY();
