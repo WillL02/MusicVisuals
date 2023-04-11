@@ -3,7 +3,7 @@ package C21318233;
 import ie.tudublin.*;
 
 public class Heathens extends Visual {
-    Rain[] d = new Rain[200];
+    Rain[] d = new Rain[400];
     float lerpedAverage = 0;
 
     public void settings() {
@@ -23,8 +23,8 @@ public class Heathens extends Visual {
     }
 
     public void draw() {
-        //Used for syncing song to raindrops
-        calculation();
+        //Used for syncing the song to raindrops
+        rainSync();
 
         background(0);
         
@@ -34,16 +34,19 @@ public class Heathens extends Visual {
             d[i].show();
             d[i].bottom();
         }
-        
-        circleGroup();
+
+        bouncingCircle();
 
     }
 
-    public void circleGroup() {
-        calculateAverageAmplitude();
+    public void bouncingCircle() {
         float halfheight = height / 2;
         float halfwidth = width / 2;
+        
+        //For syncing with song
+        calculateAverageAmplitude();
 
+        //Draws circle
         stroke(255, 0, 0);
         strokeWeight(3);
         fill(0);
@@ -51,7 +54,8 @@ public class Heathens extends Visual {
     }
 
     
-    public void calculation() {
+    public void rainSync() {
+        //For syncing song
         float total = 0;
         for (int i = 0; i < getAudioBuffer().size(); i++) {
             total += abs(getAudioBuffer().get(i));
