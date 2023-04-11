@@ -3,7 +3,9 @@ package C21318233;
 import ie.tudublin.*;
 
 public class Heathens extends Visual {
+
     Rain[] d = new Rain[400];
+    boolean firstBeat = true;
     float lerpedAverage = 0;
 
     public void settings() {
@@ -12,29 +14,31 @@ public class Heathens extends Visual {
 
     public void setup() {
 
+        //Start playing audio
         startMinim();
         loadAudio("heathens.mp3");
         getAudioPlayer().play();
 
-        //Initialising rain drops at random y values
+        //Initialising rain drops at random x and y values
         for (int i = 0; i < d.length; i++) {
             d[i] = new Rain(this, random(0, width), random(-1000, 0));
         }
     }
 
     public void draw() {
+
         //Used for syncing the song to raindrops
         rainSync();
 
         background(0);
         
-        //Rain functions
+        //Rain effect
         for (int i = 0; i < d.length; i++) {
             d[i].fall(lerpedAverage);
-            d[i].show();
+            d[i].show(firstBeat);
             d[i].bottom();
         }
-
+        
         bouncingCircle();
 
     }

@@ -19,9 +19,16 @@ public class Rain {
     }
 
     //Shows the raindrop
-    public void show() {
-        h.stroke(255);
-        h.line(x, y, x, y + 10);
+    public void show(boolean color) {
+        if (color)
+        {
+            h.stroke(0,0,255);
+        }
+        else 
+        {
+          h.stroke(255);  
+        }
+        h.line(x, y, x, y + h.random(10,20));
     }
 
     //Once the raindrop hits the bottom, it resets to the top at a random y value
