@@ -38,13 +38,6 @@ public class Heathens extends Visual {
         {
             background(0);
         }
-
-        //Second drop of the song (Start of line visual)
-        if (millis() > 47000)
-        {
-            stroke(255,0,0);
-            line(0,0, 500, 500); //For testing purposes
-        }
         
         //Rain effect
         for (int i = 0; i < d.length; i++) {
@@ -54,6 +47,13 @@ public class Heathens extends Visual {
         }
         
         bouncingCircle();
+
+        //Second drop of the song (Start of line visual)
+        if (millis() > 47000)
+        {
+            stroke(255,0,0);
+            line(0,0, 500, 500); //For testing purposes
+        }
 
     }
 
@@ -87,10 +87,15 @@ public class Heathens extends Visual {
     public void rainSync() {
         //For syncing song
         float total = 0;
-        for (int i = 0; i < getAudioBuffer().size(); i++) {
+        for (int i = 0; i < getAudioBuffer().size(); i++) 
+        {
             total += abs(getAudioBuffer().get(i));
         }
         float average = total / (float) getAudioBuffer().size();
         lerpedAverage = lerp(lerpedAverage, average, 0.1f);
+    }
+
+    public void lineVisual() {
+        
     }
 }

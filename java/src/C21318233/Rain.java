@@ -15,11 +15,12 @@ public class Rain {
 
     //Determines the speed of the raindrop based on the amplitude
     public void fall(float amplitude) {
-        y += Heathens.map(amplitude, 0, 1.0f, 6, 12.0f);
+        y += Heathens.map(amplitude, 0, 1.0f, 4, 60.0f);
     }
 
     //Shows the raindrop
     public void show() {
+
         //Rain changes color on the first beat drop
         if (h.millis() > 25895)
         {
@@ -29,6 +30,7 @@ public class Rain {
         {
           h.stroke(255);  
         }
+        
         h.line(x, y, x, y + h.random(10,20));
     }
 
