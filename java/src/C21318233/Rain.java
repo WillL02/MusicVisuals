@@ -19,8 +19,9 @@ public class Rain {
     }
 
     //Shows the raindrop
-    public void show(boolean color) {
-        if (color)
+    public void show() {
+        //Rain changes color on the first beat drop
+        if (h.millis() > 25895)
         {
             h.stroke(0,0,255);
         }

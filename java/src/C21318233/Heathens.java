@@ -5,7 +5,6 @@ import ie.tudublin.*;
 public class Heathens extends Visual {
 
     Rain[] d = new Rain[400];
-    boolean firstBeat = true;
     float lerpedAverage = 0;
 
     public void settings() {
@@ -30,12 +29,27 @@ public class Heathens extends Visual {
         //Used for syncing the song to raindrops
         rainSync();
 
-        background(0);
+        //First drop of the song (Changes background)
+        if (millis() > 25895)
+        {
+            background(47,79,79);
+        }
+        else
+        {
+            background(0);
+        }
+
+        //Second drop of the song (Start of line visual)
+        if (millis() > 47000)
+        {
+            stroke(255,0,0);
+            line(0,0, 500, 500); //For testing purposes
+        }
         
         //Rain effect
         for (int i = 0; i < d.length; i++) {
             d[i].fall(lerpedAverage);
-            d[i].show(firstBeat);
+            d[i].show();
             d[i].bottom();
         }
         
@@ -51,9 +65,21 @@ public class Heathens extends Visual {
         calculateAverageAmplitude();
 
         //Draws circle
-        stroke(255, 0, 0);
         strokeWeight(3);
-        fill(0);
+
+        //Changes color of circle on the first drop of the song
+        if (millis() > 25895)
+        {
+            stroke(255);
+            fill(47,79,79);
+        }
+        else
+        {
+            stroke(255,0,0);
+            fill(0);
+            
+        }
+
         circle(halfwidth, halfheight, getSmoothedAmplitude() * 2000);
     }
 
