@@ -6,9 +6,14 @@ public class Heathens extends Visual {
 
     Rain[] d = new Rain[400];
     float lerpedAverage = 0;
-    float firstDrop = 25895;
+    float firstDrop = 25880;
     float secondDrop = 47000;
     float thirdDrop = 57700;
+
+    float scale = 10;
+    float xPan = 500;
+    float yPan = 500;
+    boolean zoomOut = true;
 
     public void settings() {
         size(1000, 1000);
@@ -28,20 +33,20 @@ public class Heathens extends Visual {
     }
 
     public void draw() {
-        
+
         // Used for syncing the song to raindrops
         rainSync();
 
         // First drop of the song (Changes background)
-        if (millis() > firstDrop && millis() < 46000) {
+        if (millis() >= firstDrop && millis() <= 46000) {
             background(47, 79, 79);
 
-        } else if (millis() < firstDrop) {
+        } else if (millis() <= firstDrop) {
             background(0);
         }
 
-        //For transition between first and second drop of song
-        if (millis() < secondDrop) {
+        // For transition between first and second drop of song
+        if (millis() <= secondDrop) {
             // Rain effect
             for (int i = 0; i < d.length; i++) {
                 d[i].fall(lerpedAverage);
@@ -49,21 +54,26 @@ public class Heathens extends Visual {
                 d[i].bottom();
             }
             bouncingCircle();
-        }
-        else if (millis() > 47000 && millis() < 47100) //Transition part
+        } else if (millis() >= 47000 && millis() <= 47100) // Transition part
         {
             background(47, 79, 79);
         }
 
+        translate(width / 2, height / 2);
+        scale(scale);
+        translate(-xPan, -yPan);
+        
         // Second drop of the song (Start of line visual)
-        if (millis() > secondDrop) {
-            lineVisual();
+        if (millis() >= secondDrop) {
+            if (zoomOut == true)
+            {
+                lineVisual();
+                scale /= 1.01;
+            }
         }
 
-        //Third drop of the song
-        if (millis() > thirdDrop)
-        {
-            background(47, 79, 79);
+        // Third drop of the song
+        if (millis() >= thirdDrop) {
         }
 
     }
@@ -100,7 +110,7 @@ public class Heathens extends Visual {
         lerpedAverage = lerp(lerpedAverage, average, 0.1f);
     }
 
-    //Random line visual for second drop of song
+    // Random line visual for second drop of song
     public void lineVisual() {
         stroke(random(50, 255));
         strokeWeight(15);
