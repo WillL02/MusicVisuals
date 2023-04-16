@@ -96,7 +96,7 @@ public class Heathens extends Visual {
             stroke(255, 0, 0);
             fill(0);
         }
-        circle(halfwidth, halfheight, getSmoothedAmplitude() * 2000);
+        circle(halfwidth, halfheight, getSmoothedAmplitude() * 5000);
     }
 
     // For syncing song to rain
