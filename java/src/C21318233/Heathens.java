@@ -10,7 +10,7 @@ public class Heathens extends Visual {
     float secondDrop = 47000;
     float thirdDrop = 57700;
 
-    float scale = 10;
+    float scale = 1;
     float xPan = 500;
     float yPan = 500;
     boolean zoomOut = true;
@@ -54,7 +54,7 @@ public class Heathens extends Visual {
                 d[i].bottom();
             }
             bouncingCircle();
-        } else if (millis() >= 47000 && millis() <= 47100) // Transition part
+        } else if (millis() >= secondDrop && millis() <= 47100) // Transition part
         {
             background(47, 79, 79);
         }
@@ -63,12 +63,12 @@ public class Heathens extends Visual {
         scale(scale);
         translate(-xPan, -yPan);
         
-        // Second drop of the song (Start of line visual)
+        // Second drop of the song (Start of rectangle visual)
         if (millis() >= secondDrop) {
             if (zoomOut == true)
             {
-                lineVisual();
-                scale /= 1.01;
+                rectVisual();
+                scale /= 1.005;
             }
         }
 
@@ -110,10 +110,11 @@ public class Heathens extends Visual {
         lerpedAverage = lerp(lerpedAverage, average, 0.1f);
     }
 
-    // Random line visual for second drop of song
-    public void lineVisual() {
+    // Rectangle Visual
+    public void rectVisual() {
         stroke(random(50, 255));
         strokeWeight(15);
-        line(random(width), random(height), random(width), random(height));
+        rectMode(CENTER);
+        rect(width / 2, height / 2, width, height);
     }
 }
