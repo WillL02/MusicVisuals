@@ -24,7 +24,7 @@ public class Rain {
         //Rain changes color on the first beat drop
         if (h.millis() > 25895)
         {
-            h.stroke(0,0,255);
+            h.stroke(103, 183, 209);
         }
         else 
         {
