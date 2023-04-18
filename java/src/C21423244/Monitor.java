@@ -1,6 +1,9 @@
 package C21423244;
 
 import java.util.concurrent.TimeUnit;
+
+import C21318233.Heathens;
+import C21318233.Rain;
 import C21379483.Mouse;
 import C21379483.SafeAndSound;
 import ie.tudublin.*;
@@ -18,7 +21,7 @@ public class Monitor extends Visual
 
     boolean computerStarted = false;
     boolean startDone = false;
-    public boolean visualActive = false;
+    public int visualActive = 0;
 
 
     //MATE VARIABLES START HERE Declaring images 
@@ -43,6 +46,13 @@ public class Monitor extends Visual
     SafeAndSound mate = new SafeAndSound(this);
     int count = 0;
     // MATE VARIABLES END
+
+
+    // CRUZ VARIABLES START
+    Heathens cruz = new Heathens(this);
+    public Rain rain = new Rain(null, LINUX, Y);
+    public Rain[] d = new Rain[400];
+    // CRUZ VARIABLES END
     
 
     public void settings()
@@ -52,13 +62,13 @@ public class Monitor extends Visual
 
     public void setup()
     {
-        LoadComputer();         
+        LoadComputer();      
     }
     
 
     public void draw()
     {
-        if(visualActive == false) 
+        if(visualActive == 0) 
         {
             if(computerStarted == false) {
                 drawComputer();
@@ -84,7 +94,16 @@ public class Monitor extends Visual
             }
             
             iconHover();
-        } else 
+        } 
+        else if(visualActive == 1)
+        {
+            mate.render();
+        }
+        else if(visualActive == 2)
+        {
+            cruz.render();
+        }
+        else if(visualActive == 3)
         {
             mate.render();
         }
@@ -188,7 +207,7 @@ public class Monitor extends Visual
         loadAudio("fanBackground.mp3");
         getAudioPlayer().play();
         MS95 = createFont("W95FA.otf", 128);
-        visualActive = false;
+        visualActive = 0;
         alreadyStarted = false;
         rectMode(CORNER);
         colorMode(RGB);
@@ -200,7 +219,7 @@ public class Monitor extends Visual
         background(0);
 
         minim = new Minim(this);
-        song = minim.loadFile("song.mp3", 1024);
+        song  = minim.loadFile("song.mp3", 1024);
         windowsxp = loadImage("windowsxp.png");
         windowsxp2 = loadImage("windowsxp2.png");
         song.play();
@@ -223,6 +242,19 @@ public class Monitor extends Visual
         for (int i = 0; i < mouses.length; i++) {
             int index = (int) (random(0, mice.length));
             mouses[i] = new Mouse(mice[index], random(85, 130), this);
+        }
+    }
+
+    public void LoadHeathens() 
+    {
+        // Start playing audio
+        startMinim();
+        loadAudio("heathens.mp3");
+        getAudioPlayer().play();
+
+        // Initialising rain drops at random x and y values
+        for (int i = 0; i < d.length; i++) {
+            d[i] = new Rain(this, random(0, width), random(-1000, 0));
         }
     }
 
@@ -326,14 +358,19 @@ public class Monitor extends Visual
         if(alreadyStarted == false) {
             rect(531, 86, 91, 50+30);
             LoadSafeAndSound();
-            visualActive = true;
+            visualActive = 1;
             alreadyStarted = true;
         }
        }
 
        if(mouseX >= 531 && mouseX <= 622 && mouseY >= 176 && mouseY <= 256)
        {
-        rect(531, 176, 91, 50+30);
+        if(alreadyStarted == false) {
+            rect(531, 176, 91, 50+30);
+            LoadHeathens();
+            visualActive = 2;
+            alreadyStarted = true;
+        }
        }
 
        if(mouseX >= 531 && mouseX <= 622 && mouseY >= 266 && mouseY <= 345)

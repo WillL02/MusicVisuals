@@ -1,46 +1,44 @@
 package C21318233;
 
-import C21423244.Monitor;
 
-public class Rain {
-    Monitor m;
+public class dsaRain {
+    Heathens h;
     float x, y;
 
-    
     //Rain constructor
-    public Rain(Monitor m, float x, float y)
+    public Rain(Heathens h, float x, float y)
     {
-        this.m = m;
+        this.h = h;
         this.x = x;
         this.y = y;
     }
 
     //Determines the speed of the raindrop based on the amplitude
     public void fall(float amplitude) {
-        y += Monitor.map(amplitude, 0, 1.0f, 4, 80.0f);
+        y += Heathens.map(amplitude, 0, 1.0f, 4, 80.0f);
     }
 
     //Shows the raindrop
     public void show() {
 
         //Rain changes color on the first beat drop
-        if (m.millis() > 25895)
+        if (h.millis() > 25895)
         {
-           m.stroke(103, 183, 209);
+            h.stroke(103, 183, 209);
         }
         else 
         {
-          m.stroke(255);  
+          h.stroke(255);  
         }
         
-        m.line(x, y, x, y + m.random(10,20));
+        h.line(x, y, x, y + h.random(10,20));
     }
 
     //Once the raindrop hits the bottom, it resets to the top at a random y value
     public void bottom() {
-        if (y > m.height) 
+        if (y > h.height) 
         {
-            y = m.random(-200, 0);
+            y = h.random(-200, 0);
         }
     }
 }
