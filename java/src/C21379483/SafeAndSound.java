@@ -1,29 +1,14 @@
 package C21379483;
 
 import ie.tudublin.*;
-
-import ddf.minim.AudioBuffer;
-import ddf.minim.AudioPlayer;
-import ddf.minim.analysis.*;
 import processing.core.PImage;
-import ddf.minim.Minim;
+import C21423244.Monitor;
 
-public class SafeAndSound extends Visual {
+
+public class SafeAndSound {
 
   // Declaring Variables
-  Minim minim;
-  AudioPlayer song;
-  AudioBuffer ab;
-  FFT fft;
-
-  //Declaring images
-  PImage windowsxp;
-  PImage windowsxp2;
-  PImage exit;
-
-  //Declaring the 5 mouse curser images and making 12 mouse objects
-  PImage[] mice = new PImage[5];
-  Mouse[] mouses = new Mouse[12];
+  Monitor m;
 
   //Program starts with 1 mouse and goes up to 12
   int mouseNum = 1;
@@ -32,118 +17,90 @@ public class SafeAndSound extends Visual {
   //The rotation used for all the objects in the program
   float angle, lerpedAverage = 0;
 
-  public void settings() {
-    size(1920, 1280, P2D);
+
+  public SafeAndSound(Monitor m) 
+  {
+    this.m = m;
   }
 
-  public void setup() {
-    colorMode(HSB);
-    background(0);
-
-    minim = new Minim(this);
-    song = minim.loadFile("song.mp3", 1024);
-    windowsxp = loadImage("windowsxp.png");
-    windowsxp2 = loadImage("windowsxp2.png");
-    song.play();
-    ab = song.mix;
-    fft = new FFT(song.bufferSize(), song.sampleRate());
-
-    smooth();
-
-    rectMode(CENTER);
-
-    // Load mouse curser images
-    for (int i = 0; i < mice.length; i++) {
-      int y = i + 1;
-      mice[i] = loadImage("mouse" + y + ".png");
-    }
-
-    //Creating mouse objects, with random size between 85,130
-    //And passing this file onto Mouse class using "this"
-    for (int i = 0; i < mouses.length; i++) {
-      int index = (int) (random(0, mice.length));
-      mouses[i] = new Mouse(mice[index], random(85, 130), this);
-    }
-  }
-
-  public void draw() {
+  public void render() {
     //Start of the program
-    if (frameCount < 245) {
+    if (m.frameCount < 245) {
       startLoad();
     } else { // Load-up is done, now actual visual starts
       loadPicture();
-      exitIcon("Exit", width - 120, height - 120);
+      exitIcon("Exit", m.width - 120, m.height - 120);
       exitIconHover();
 
-      if (song.isPlaying()) { // Makes it so when the song finishes, they dissapear
-        pushMatrix();
+      if (m.song.isPlaying()) { // Makes it so when the song finishes, they dissapear
+        m.pushMatrix();
         mouseFunct();
-        popMatrix();
+        m.popMatrix();
       }
 
       dancingCircle();
-
-    }
-    if (frameCount > 245 && song.isPlaying()) {
-      dancingRectangle();
+      if (m.frameCount > 245 && m.song.isPlaying()) {
+        dancingRectangle();
+      }
     }
   }
 
   void startLoad() {
     //Load in effect, with 10,000 dots drawing a second
     for (int i = 0; i < 10000; i++) {
-      float x = random(width);
-      float y = random(height);
-      int c = windowsxp.get((int) x, (int) y);
-      fill(c, 25);
-      noStroke();
-      ellipse(x, y, 6, 6);
+      float x = m.random(m.width);
+      float y = m.random(m.height);
+      int c = m.windowsxp.get((int) x, (int) y);
+      m.fill(c, 25);
+      m.noStroke();
+      m.ellipse(x, y, 6, 6);
+      
     }
   }
 
   void loadPicture() {
     //Loads the background for the main part of the program
-    image(windowsxp2, 0, 0);
+    m.image(m.windowsxp2, 0, 0);
   }
 
   void mouseFunct() {
     //Gets the rotation and movement for the mouse
     float total = 0;
-    for (int i = 0; i < ab.size(); i++) {
-      total += abs(ab.get(i));
+    for (int i = 0; i < m.ab.size(); i++) {
+      total += m.abs(m.ab.get(i));
     }
-    float average = total / (float) ab.size();
-    lerpedAverage = lerp(lerpedAverage, average, 0.1f);
+    float average = total / (float) m.ab.size();
+    lerpedAverage = m.lerp(lerpedAverage, average, 0.1f);
 
     // Mouse images functionality added
     for (int i = 0; i < mouseNum; i++) {
-      mouses[i].move(lerpedAverage);
-      mouses[i].rotates(lerpedAverage);
-      mouses[i].display();
-      mouses[i].side();
+      m.mouses[i].move(lerpedAverage);
+      m.mouses[i].rotates(lerpedAverage);
+      m.mouses[i].display();
+      m.mouses[i].side();
     }
     // Adds a new mouse every 100 frames until there's 12, so they don't spawn at once
-    if (frameCount % 100 == 0 && mouseNum < maxMice) {
+    if (m.frameCount % 100 == 0 && mouseNum < maxMice) {
       mouseNum++;
     }
   }
 
   void dancingRectangle() {
     for (int y = 0; y < 100; y++) {
-      stroke(255 - y % 10);
-      strokeWeight(10);
-      fill(255 - y * 10, 255 - y, 255 - y);
-      scale(0.95f);
-      rotate(radians(angle));
-      rect(0, 0, 580, 580);
+      m.stroke(255 - y % 10);
+      m.strokeWeight(10);
+      m.fill(255 - y * 10, 255 - y, 255 - y);
+      m.scale(0.95f);
+      m.rotate(m.radians(angle));
+      m.rect(0, 0, 580, 580);
     }
     float total = 0;
-    for (int i = 0; i < ab.size(); i++) {
-      total += abs(ab.get(i));
+    for (int i = 0; i < m.ab.size(); i++) {
+      total += m.abs(m.ab.get(i));
     }
-    float average = total / (float) ab.size();
-    lerpedAverage = lerp(lerpedAverage, average, 0.1f);
-    angle += map(lerpedAverage, 0, 1.0f, 0, 1.5f);
+    float average = total / (float) m.ab.size();
+    lerpedAverage = m.lerp(lerpedAverage, average, 0.1f);
+    angle += m.map(lerpedAverage, 0, 1.0f, 0, 1.5f);
   }
 
   void dancingCircle() {
@@ -151,67 +108,70 @@ public class SafeAndSound extends Visual {
     int radius = 400; // Radius in pixels of the circle
     // Circle starts here
 
-    translate(width / 2, height / 2);
+    m.translate(m.width / 2, m.height / 2);
     // Audio Visualization
-    fft.forward(song.mix);
-    float bands = fft.specSize();
+    m.fft.forward(m.song.mix);
+    float bands = m.fft.specSize();
 
     for (int i = 0; i < bands * 2; i++) {
 
       // Starting positions of line
-      float start_x = radius * cos(PI * (i + x) / bands);
-      float start_y = radius * sin(PI * (i + x) / bands);
+      float start_x = radius * m.cos(m.PI * (i + x) / bands);
+      float start_y = radius * m.sin(m.PI * (i + x) / bands);
 
       // Draw line based on sound
-      float c = map(i, 0, ab.size(), 0, 255);
-      stroke(c, 255, 255);
-      strokeWeight(5);
+      float c = m.map(i, 0, m.ab.size(), 0, 255);
+      m.stroke(c, 255, 255);
+      m.strokeWeight(5);
       if (i < bands) {
         // Line based on band length
-        line(start_x, start_y, start_x + fft.getBand(i) * 7 * cos(PI * (i + x) / bands),
-            start_y + fft.getBand(i) * 7 * sin(PI * (i + x) / bands));
+        m.line(start_x, start_y, start_x + m.fft.getBand(i) * 7 * m.cos(m.PI * (i + x) / bands),
+            start_y + m.fft.getBand(i) * 7 * m.sin(m.PI * (i + x) / bands));
       } else {
         // Line based on frequency
-        line(start_x, start_y, start_x + fft.getFreq(i) * 5 * cos(PI * (i + x) / bands),
-            start_y + fft.getFreq(i) * 5 * sin(PI * (i + x) / bands));
+        m.line(start_x, start_y, start_x + m.fft.getFreq(i) * 5 * m.cos(m.PI * (i + x) / bands),
+            start_y + m.fft.getFreq(i) * 5 * m.sin(m.PI * (i + x) / bands));
       }
     }
   }
 
   void exitIcon(String text, float x, float y) {
-    exit = loadImage("exit.png");
-    image(exit, x, y);
-    fill(0, 408, 612);
-    textSize(25);
-    text(text, x + 8, y + 77);
+    m.exit = m.loadImage("exit.png");
+    m.image(m.exit, x, y);
+    m.fill(0, 408, 612);
+    m.textSize(25);
+    m.text(text, x + 8, y + 77);
   }
 
   void exitIconHover() {
-    if (mouseX > width - 140 && mouseX < width - 20 && mouseY > height - 130 && mouseY < height - 20) {
-      cursor(HAND); // Changes the curser when hovering over the icon
-      noStroke();
-      fill(49, 182, 255, 65);
-      rect(width - 92, height - 85, 100, 100);
+    if (m.mouseX > m.width - 140 && m.mouseX < m.width - 20 && m.mouseY > m.height - 130 && m.mouseY < m.height - 20) {
+      m.cursor(Monitor.HAND); // Changes the curser when hovering over the icon
+      m.noStroke();
+      m.fill(49, 182, 255, 65);
+      m.rect(m.width - 92, m.height - 85, 100, 100);
       // Exits the program if EXIT icon is pressed
-      if (mousePressed) {
-        song.pause();
-        minim.stop();
-        exit();
+      if (m.mousePressed) {
+        m.song.pause();
+        m.minim.stop();
+        m.frameCount = 0;
+        m.cursor(Monitor.ARROW); // Default curser everywhere else
+        m.LoadComputer();
+       
       }
     } else {
-      cursor(ARROW); // Default curser everywhere else
+      m.cursor(Monitor.ARROW); // Default curser everywhere else
     }
     // If the moving mouse hovers over the exit icon, it draws retangle too
     for (int i = 0; i < maxMice; i++) {
-      float mouseXPos = mouses[i].getX();
-      float mouseYPos = mouses[i].getY();
-      float mouseSize = mouses[i].getSize();
+      float mouseXPos = m.mouses[i].getX();
+      float mouseYPos = m.mouses[i].getY();
+      float mouseSize = m.mouses[i].getSize();
 
-      if (mouseXPos + mouseSize > width - 140 && mouseXPos + mouseSize < width - 20
-          && mouseYPos + mouseSize > height - 130 && mouseYPos + mouseSize < height - 20) {
-        noStroke();
-        fill(49, 182, 255, 65);
-        rect(width - 92, height - 85, 100, 100);
+      if (mouseXPos + mouseSize > m.width - 140 && mouseXPos + mouseSize < m.width - 20
+          && mouseYPos + mouseSize > m.height - 130 && mouseYPos + mouseSize <m. height - 20) {
+        m.noStroke();
+        m.fill(49, 182, 255, 65);
+        m.rect(m.width - 92, m.height - 85, 100, 100);
       }
     }
   }

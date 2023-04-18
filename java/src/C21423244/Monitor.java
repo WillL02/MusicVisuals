@@ -1,69 +1,97 @@
 package C21423244;
 
 import java.util.concurrent.TimeUnit;
-
+import C21379483.Mouse;
+import C21379483.SafeAndSound;
 import ie.tudublin.*;
 import processing.core.PFont;
 import processing.core.PImage;
+import ddf.minim.AudioBuffer;
+import ddf.minim.AudioPlayer;
+import ddf.minim.analysis.*;
+import ddf.minim.Minim;
+
 public class Monitor extends Visual
 {   
-    PImage img;
+    PImage icon;
     PFont MS95;
 
     boolean computerStarted = false;
     boolean startDone = false;
+    public boolean visualActive = false;
+
+
+    //MATE VARIABLES START HERE Declaring images 
+    public Minim minim;
+    public AudioPlayer song;
+    public AudioBuffer ab;
+    public FFT fft;
+
+    public PImage windowsxp;
+    public PImage windowsxp2;
+    public PImage exit;
+
+    //Declaring the 5 mouse curser images and making 12 mouse objects
+    public PImage[] mice = new PImage[5];
+    public Mouse[] mouses = new Mouse[12];
+
+    //Program starts with 1 mouse and goes up to 12
+    public int mouseNum = 1;
+    public int maxMice = 12;
+    
+    public boolean alreadyStarted = false;
+    SafeAndSound mate = new SafeAndSound(this);
+    int count = 0;
+    // MATE VARIABLES END
     
 
     public void settings()
     {
-        fullScreen();
-
-        // Use this to make fullscreen and use P3D for 3D graphics
-        //fullScreen(P3D, SPAN); 
+        size(1920,1080,P2D);
     }
 
     public void setup()
     {
-        drawComputer();
-        startMinim();
-        loadAudio("fanBackground.mp3");
-        getAudioPlayer().play();
-
-        // img = loadImage("test.jpg");
-        // image(img, 525, 80);
-        MS95 = createFont("W95FA.otf", 128); 
+        LoadComputer();         
     }
-    int count = 0;
+    
 
     public void draw()
     {
-        if(computerStarted == false) {
-            loadingMode();
-            
-        } else {
-            if(startDone == false) {
-                wait(4);
-            }
-            startDone = true;
-            desktopMode();
-        }
-        
-        
-        //Plays audio once, needs fix
-        if(count == 0) 
+        if(visualActive == false) 
         {
-            startMinim();
-            loadAudio("startupSound95.mp3");
-            getAudioPlayer().play();
-            count++;
+            if(computerStarted == false) {
+                drawComputer();
+                loadingMode();
+                
+            } else {
+                if(startDone == false) {
+                    wait(0);
+                }
+                startDone = true;
+                drawComputer();
+                desktopMode();
+            }
+            
+            
+            //Plays audio once, needs fix
+            if(count == 0) 
+            {
+                startMinim();
+                loadAudio("startupSound95.mp3");
+                getAudioPlayer().play();
+                count++;
+            }
+            
+            iconHover();
+        } else 
+        {
+            mate.render();
         }
-        
-        iconHover();
     }
 
     public void iconHover() 
     {
-        //fill(0,128,128);
         if(mouseX >= 531 && mouseX <= 622 && mouseY >= 86 && mouseY <= 166)
         {
             stroke(0,182,255);
@@ -153,6 +181,51 @@ public class Monitor extends Visual
         quad(x+size+offset, y+size+(offset*3),   x+(size*2)+offset, y+size+(offset*4),   x+(size*2), y+(size*2)+(offset*4),   x+size, y+(size*2)+(offset*3));
     }
 
+    public void LoadComputer() 
+    {
+        drawComputer();
+        startMinim();
+        loadAudio("fanBackground.mp3");
+        getAudioPlayer().play();
+        MS95 = createFont("W95FA.otf", 128);
+        visualActive = false;
+        alreadyStarted = false;
+        rectMode(CORNER);
+        colorMode(RGB);
+    }
+
+    public void LoadSafeAndSound() 
+    {
+        colorMode(HSB);
+        background(0);
+
+        minim = new Minim(this);
+        song = minim.loadFile("song.mp3", 1024);
+        windowsxp = loadImage("windowsxp.png");
+        windowsxp2 = loadImage("windowsxp2.png");
+        song.play();
+        ab = song.mix;
+        fft = new FFT(song.bufferSize(), song.sampleRate());
+
+        smooth();
+
+        rectMode(CENTER);
+
+
+        // Load mouse curser images
+        for (int i = 0; i < mice.length; i++) {
+            int y = i + 1;
+           mice[i] = loadImage("mouse" + y + ".png");
+        }
+  
+        //Creating mouse objects, with random size between 85,130
+        //And passing this file onto Mouse class using "this"
+        for (int i = 0; i < mouses.length; i++) {
+            int index = (int) (random(0, mice.length));
+            mouses[i] = new Mouse(mice[index], random(85, 130), this);
+        }
+    }
+
 
     public void loadingMode() 
     {
@@ -239,12 +312,8 @@ public class Monitor extends Visual
 
     public void desktopIcon(String text, String imgName, float x, float y) 
     {
-        img = loadImage(imgName);
-        image(img, x, y);
-        
-        //Icon Template
-       // fill(191,186,197);
-        //rect(x, y, 50, 50);
+        icon = loadImage(imgName);
+        image(icon, x, y);
 
         //Text
         fill(255);
@@ -254,7 +323,12 @@ public class Monitor extends Visual
     public void mousePressed() {
        if(mouseX >= 531 && mouseX <= 622 && mouseY >= 86 && mouseY <= 166)
        {
-        rect(531, 86, 91, 50+30);
+        if(alreadyStarted == false) {
+            rect(531, 86, 91, 50+30);
+            LoadSafeAndSound();
+            visualActive = true;
+            alreadyStarted = true;
+        }
        }
 
        if(mouseX >= 531 && mouseX <= 622 && mouseY >= 176 && mouseY <= 256)
@@ -266,16 +340,6 @@ public class Monitor extends Visual
        {
         rect(531, 266, 91, 50+30);
        }
-
-
-
-
-
-
-
-       System.out.println(mouseX);
-       System.out.println(mouseY);
-       System.out.println();
     }
 
     private void wait(int waitSeconds) 
