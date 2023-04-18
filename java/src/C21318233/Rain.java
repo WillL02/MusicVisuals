@@ -15,7 +15,7 @@ public class Rain {
 
     //Determines the speed of the raindrop based on the amplitude
     public void fall(float amplitude) {
-        y += Heathens.map(amplitude, 0, 1.0f, 4, 60.0f);
+        y += Heathens.map(amplitude, 0, 1.0f, 4, 80.0f);
     }
 
     //Shows the raindrop

@@ -74,6 +74,8 @@ public class Heathens extends Visual {
 
         // Third drop of the song
         if (millis() >= thirdDrop) {
+            background(47, 79, 79);
+
         }
 
     }
@@ -96,7 +98,7 @@ public class Heathens extends Visual {
             stroke(255, 0, 0);
             fill(0);
         }
-        circle(halfwidth, halfheight, getSmoothedAmplitude() * 5000);
+        circle(halfwidth, halfheight, getSmoothedAmplitude() * 3000);
     }
 
     // For syncing song to rain
