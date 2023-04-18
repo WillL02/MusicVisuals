@@ -1,8 +1,8 @@
 package C21379483;
 
-import ie.tudublin.*;
-import processing.core.PImage;
 import C21423244.Monitor;
+
+import static C21423244.Monitor.*;
 
 
 public class SafeAndSound {
@@ -67,10 +67,10 @@ public class SafeAndSound {
     //Gets the rotation and movement for the mouse
     float total = 0;
     for (int i = 0; i < m.ab.size(); i++) {
-      total += m.abs(m.ab.get(i));
+      total += abs(m.ab.get(i));
     }
     float average = total / (float) m.ab.size();
-    lerpedAverage = m.lerp(lerpedAverage, average, 0.1f);
+    lerpedAverage = lerp(lerpedAverage, average, 0.1f);
 
     // Mouse images functionality added
     for (int i = 0; i < mouseNum; i++) {
@@ -91,16 +91,16 @@ public class SafeAndSound {
       m.strokeWeight(10);
       m.fill(255 - y * 10, 255 - y, 255 - y);
       m.scale(0.95f);
-      m.rotate(m.radians(angle));
+      m.rotate(radians(angle));
       m.rect(0, 0, 580, 580);
     }
     float total = 0;
     for (int i = 0; i < m.ab.size(); i++) {
-      total += m.abs(m.ab.get(i));
+      total += abs(m.ab.get(i));
     }
     float average = total / (float) m.ab.size();
-    lerpedAverage = m.lerp(lerpedAverage, average, 0.1f);
-    angle += m.map(lerpedAverage, 0, 1.0f, 0, 1.5f);
+    lerpedAverage = lerp(lerpedAverage, average, 0.1f);
+    angle += map(lerpedAverage, 0, 1.0f, 0, 1.5f);
   }
 
   void dancingCircle() {
@@ -116,21 +116,21 @@ public class SafeAndSound {
     for (int i = 0; i < bands * 2; i++) {
 
       // Starting positions of line
-      float start_x = radius * m.cos(m.PI * (i + x) / bands);
-      float start_y = radius * m.sin(m.PI * (i + x) / bands);
+      float start_x = radius * cos(PI * (i + x) / bands);
+      float start_y = radius * sin(PI * (i + x) / bands);
 
       // Draw line based on sound
-      float c = m.map(i, 0, m.ab.size(), 0, 255);
+      float c = map(i, 0, m.ab.size(), 0, 255);
       m.stroke(c, 255, 255);
       m.strokeWeight(5);
       if (i < bands) {
         // Line based on band length
-        m.line(start_x, start_y, start_x + m.fft.getBand(i) * 7 * m.cos(m.PI * (i + x) / bands),
-            start_y + m.fft.getBand(i) * 7 * m.sin(m.PI * (i + x) / bands));
+        m.line(start_x, start_y, start_x + m.fft.getBand(i) * 7 * cos(PI * (i + x) / bands),
+            start_y + m.fft.getBand(i) * 7 * sin(PI * (i + x) / bands));
       } else {
         // Line based on frequency
-        m.line(start_x, start_y, start_x + m.fft.getFreq(i) * 5 * m.cos(m.PI * (i + x) / bands),
-            start_y + m.fft.getFreq(i) * 5 * m.sin(m.PI * (i + x) / bands));
+        m.line(start_x, start_y, start_x + m.fft.getFreq(i) * 5 * cos(PI * (i + x) / bands),
+            start_y + m.fft.getFreq(i) * 5 * sin(PI * (i + x) / bands));
       }
     }
   }
