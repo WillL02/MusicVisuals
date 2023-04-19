@@ -9,9 +9,9 @@ public class Heathens {
     
     float lerpedAverage = 0;
     
-    float firstDrop = 25880;
-    float secondDrop = 47000;
-    float thirdDrop = 57700;
+    float firstDrop = 1553;
+    float secondDrop = 2820;
+    float thirdDrop = 3462;
 
     float scale;
     boolean zoomOut;
@@ -22,7 +22,7 @@ public class Heathens {
         this.m = m;
         this.scale = 1;
         zoomOut = true;
-
+        this.m.frameCount = 0;
     }
 
     public void render() {
@@ -32,15 +32,15 @@ public class Heathens {
 
         
         // First drop of the song (Changes background)
-        if (m.millis() >= firstDrop && m.millis() <= 46000) {
+        if (m.frameCount >= firstDrop && m.frameCount <= 2760) {
             m.background(47, 79, 79);
 
-        } else if (m.millis() <= firstDrop) {
+        } else if (m.frameCount <= firstDrop) {
             m.background(0);
         }
 
         // For transition between first and second drop of song
-        if (m.millis() <= secondDrop) {
+        if (m.frameCount <= secondDrop) {
             // Rain effect
             for (int i = 0; i < m.d.length; i++) {
                 m.d[i].fall(lerpedAverage);
@@ -48,7 +48,7 @@ public class Heathens {
                 m.d[i].bottom();
             }
             bouncingCircle();
-        } else if (m.millis() >= secondDrop && m.millis() <= 47100) // Transition part
+        } else if (m.frameCount >= secondDrop && m.frameCount <= 2826) // Transition part
         {
            m.background(47, 79, 79);
         }
@@ -59,7 +59,7 @@ public class Heathens {
         m.translate(-m.width / 2 , -m.height / 2);
     
         // Second drop of the song (Start of rectangle visual)
-        if (m.millis() >= secondDrop) {
+        if (m.frameCount >= secondDrop) {
             if (zoomOut == true)
             {
                 rectVisual();
@@ -69,7 +69,7 @@ public class Heathens {
 
         
         // Third drop of the song
-        if (m.millis() >= thirdDrop) {
+        if (m.frameCount >= thirdDrop) {
             m.background(47, 79, 79);
 
         }
@@ -88,7 +88,7 @@ public class Heathens {
         m.strokeWeight(3);
 
         // Changes color of circle on the first drop of the song
-        if (m.millis() > 25895) {
+        if (m.frameCount > 1554) {
             m.stroke(255);
             m.fill(47, 79, 79);
         } else {
