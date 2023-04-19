@@ -8,29 +8,29 @@ public class Heathens {
     Monitor m;
     
     float lerpedAverage = 0;
+    
     float firstDrop = 25880;
     float secondDrop = 47000;
     float thirdDrop = 57700;
 
-    float scale = 1;
-    float xPan = 500;
-    float yPan = 500;
-    boolean zoomOut = true;
+    float scale;
+    boolean zoomOut;
 
 
     public Heathens(Monitor m) 
     {
         this.m = m;
+        this.scale = 1;
+        zoomOut = true;
+
     }
 
     public void render() {
 
-        // exitIcon("Exit", m.width - 120, m.height - 120);
-        // exitIconHover();
-
-        // Used for syncing the song to raindrops
+        //Used for syncing the song to raindrops
         rainSync();
 
+        
         // First drop of the song (Changes background)
         if (m.millis() >= firstDrop && m.millis() <= 46000) {
             m.background(47, 79, 79);
@@ -53,10 +53,11 @@ public class Heathens {
            m.background(47, 79, 79);
         }
 
+        
         m.translate(m.width / 2, m.height / 2);
         m.scale(scale);
-        m.translate(-xPan, -yPan);
-        
+        m.translate(-m.width / 2 , -m.height / 2);
+    
         // Second drop of the song (Start of rectangle visual)
         if (m.millis() >= secondDrop) {
             if (zoomOut == true)
@@ -66,13 +67,14 @@ public class Heathens {
             }
         }
 
+        
         // Third drop of the song
         if (m.millis() >= thirdDrop) {
             m.background(47, 79, 79);
 
         }
-        exitIcon("Exit", m.width - 120, m.height - 120);
-        exitIconHover();
+        // exitIcon("Exit", m.width - 120, m.height - 120);
+        // exitIconHover();
     }
 
     public void bouncingCircle() {
@@ -109,35 +111,36 @@ public class Heathens {
 
     // Rectangle Visual
     public void rectVisual() {
+        float halfheight = m.height / 2;
+        float halfwidth = m.width / 2;
         m.stroke(m.random(50, 255));
         m.strokeWeight(15);
-        m.rectMode(m.CENTER);
-        m.rect(m.width / 2, m.height / 2, m.width, m.height);
+        m.rect(halfwidth, halfheight, m.width, m.height);
     }
 
-    void exitIcon(String text, float x, float y) {
-        m.exit = m.loadImage("exit.png");
-        m.image(m.exit, x, y);
-        m.fill(0, 408, 612);
-        m.textSize(25);
-        m.text(text, x + 8, y + 77);
-      }
+    // void exitIcon(String text, float x, float y) {
+    //     m.exit = m.loadImage("exit.png");
+    //     m.image(m.exit, x, y);
+    //     m.fill(0, 408, 612);
+    //     m.textSize(25);
+    //     m.text(text, x + 8, y + 77);
+    // }
     
-      void exitIconHover() {
-        if (m.mouseX > m.width - 140 && m.mouseX < m.width - 20 && m.mouseY > m.height - 130 && m.mouseY < m.height - 20) {
-          m.cursor(Monitor.HAND); // Changes the curser when hovering over the icon
-          m.noStroke();
-          m.fill(49, 182, 255, 65);
-          m.rect(m.width - 92, m.height - 85, 100, 100);
-          // Exits the program if EXIT icon is pressed
-          if (m.mousePressed) {
-            m.song.pause();
-            m.minim.stop();
-            m.LoadComputer();
+    // void exitIconHover() {
+    //     if (m.mouseX > m.width - 140 && m.mouseX < m.width - 20 && m.mouseY > m.height - 130 && m.mouseY < m.height - 20) {
+    //         m.cursor(Monitor.HAND); // Changes the curser when hovering over the icon
+    //         m.noStroke();
+    //         m.fill(49, 182, 255, 65);
+    //         m.rect(m.width - 92, m.height - 85, 100, 100);
+    //         // Exits the program if EXIT icon is pressed
+    //         if (m.mousePressed) {
+    //         m.song.pause();
+    //         m.minim.stop();
+    //         m.LoadComputer();
 
-          }
-        } else {
-          m.cursor(Monitor.ARROW); // Default curser everywhere else
-        }
-      }
+    //         }
+    //     } else {
+    //         m.cursor(Monitor.ARROW); // Default curser everywhere else
+    //     }
+    // }
 }
