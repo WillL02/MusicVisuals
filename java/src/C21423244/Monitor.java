@@ -256,6 +256,8 @@ public class Monitor extends Visual
         for (int i = 0; i < d.length; i++) {
             d[i] = new Rain(this, random(0, width), random(-1000, 0));
         }
+
+        rectMode(CENTER);
     }
 
 
