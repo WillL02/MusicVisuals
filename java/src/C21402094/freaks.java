@@ -1,15 +1,13 @@
 package C21402094;
 
-import processing.sound.*;
 import ddf.minim.AudioBuffer;
 import ddf.minim.AudioInput;
 import ddf.minim.AudioPlayer;
 import ddf.minim.Minim;
 
-import C21423244.Monitor;
 import ie.tudublin.*;
 
-public class freaks {
+public class freaks extends Visual{
     float angle = 0, i;
     float lerpedAverage = 0;
     float beatThreshold = 0.5f;
@@ -29,11 +27,14 @@ public class freaks {
     AudioPlayer ap;
     AudioBuffer ab;
 
-    public void setup() {
+    public void settings() {
         size(1344, 756, P2D);
+    }
 
-        bh = new blackHole();
-        s = new Star();
+    public void setup() {
+        
+        bh = new blackHole(this);
+        s = new Star(this);
 
         minim = new Minim(this);
         ap = minim.loadFile("TimmyTrumpet.mp3", 2048);
@@ -41,11 +42,11 @@ public class freaks {
         ab = ap.mix;
 
         for (int i = 0; i < stickmen.length; i++) {
-            stickmen[i] = new Stickman();
+            stickmen[i] = new Stickman(this);
         }
 
         for (int i = 0; i < clouds.length; i++) {
-            clouds[i] = new Cloud();
+            clouds[i] = new Cloud(this);
         }
 
         frameCount = 0;
@@ -122,8 +123,8 @@ public class freaks {
                         float dx = clouds[i].x - clouds[j].x;
                         float dy = clouds[i].y - clouds[j].y;
                         float angle = atan2(dy, dx);
-                        float distance = (clouds[i].w / 1.5) + (clouds[j].w / 1.5)
-                                - dist(clouds[i].x, clouds[i].y, clouds[j].x, clouds[j].y);
+                        float distance = (float) ((clouds[i].w / 1.5) + (clouds[j].w / 1.5)
+                                - dist(clouds[i].x, clouds[i].y, clouds[j].x, clouds[j].y));
                         float newX = clouds[i].x + cos(angle) * distance;
                         float newY = clouds[i].y + sin(angle) * distance;
                         clouds[i].x = newX;
@@ -148,8 +149,8 @@ public class freaks {
                         float tx = stickmen[i].x - stickmen[j].x;
                         float ty = stickmen[i].y - stickmen[j].y;
                         float angle = atan2(ty, tx);
-                        float distance = (stickmen[i].w / 1.5) + (stickmen[j].w / 1.5)
-                                - dist(stickmen[i].x, stickmen[i].y, stickmen[j].x, stickmen[j].y);
+                        float distance = (float) ((stickmen[i].w / 1.5) + (stickmen[j].w / 1.5)
+                                - dist(stickmen[i].x, stickmen[i].y, stickmen[j].x, stickmen[j].y));
                         float newX = stickmen[i].x + cos(angle) * distance;
                         float newY = stickmen[i].y + sin(angle) * distance;
                         stickmen[i].x = newX;
@@ -163,5 +164,9 @@ public class freaks {
         } // else
 
     }// end function
+
+    public float random(double d, double e) {
+        return 0;
+    }
 
 }

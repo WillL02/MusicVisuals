@@ -1,19 +1,21 @@
 package C21402094;
 
-import ie.tudublin.*;
-
 public class Cloud {
+
+    freaks anmar = new freaks();
+
     float x, y, w, h, a, temp;
     int ep;
     float speed = 6;
 
-    public Cloud()
+    public Cloud(freaks anmar)
     {
         w = 200;
-        h = random(65, 100);
-        x = random(w/2, width-w/2);
-        y = random(h/2, height-h/2);
-        ep = (int)random(0, 2);
+        h = anmar.random(65, 100);
+        x = anmar.random(w/2, anmar.width-w/2);
+        y = anmar.random(h/2, anmar.height-h/2);
+        ep = (int)anmar.random(0, 2);
+        this.anmar = anmar;
     }// end functions
     
     public void displayCloud()
@@ -27,19 +29,19 @@ public class Cloud {
             a = x + w/10;
         }// end else
         
-        noStroke();
-        fill(250);
-        rectMode(CENTER);
-        ellipse(a, y-h/2, w/2, w/2);
-        rect(x, y, w, h, h/2);
+        anmar.noStroke();
+        anmar.fill(250);
+        anmar.rectMode(freaks.CENTER);
+        anmar.ellipse(a, y-h/2, w/2, w/2);
+        anmar.rect(x, y, w, h, h/2);
     }// end function
 
         
     public void moveCloud(boolean go)
     {
-        if(y-h/2-w/2 > height && !go)
+        if(y-h/2-w/2 > anmar.height && !go)
         {
-            temp = -1 *(random(0 + h/2 + w/2, 170));
+            temp = -1 *(anmar.random(0 + h/2 + w/2, 170));
             y = temp;
         }// end if
         
@@ -49,7 +51,7 @@ public class Cloud {
     
     public boolean overlaps(Cloud object)
     {
-        float d = dist(x, y, object.x, object.y);
+        float d = freaks.dist(x, y, object.x, object.y);
         
         return (d < (w/1.5) + (object.w/1.5));
     }// end function
