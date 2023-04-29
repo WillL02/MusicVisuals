@@ -9,9 +9,13 @@ public class Heathens {
     
     float lerpedAverage = 0;
     
-    float firstDrop = 1553;
-    float secondDrop = 2820;
-    float thirdDrop = 3462;
+    // float firstDrop = 1553;
+    // float secondDrop = 2820;
+    // float thirdDrop = 3462;
+    float firstDrop = 1474;
+    float secondDrop = 2746;
+    float thirdDrop = 3391;
+    float fourthDrop = 4195;
 
     float scale;
     boolean zoomOut;
@@ -22,11 +26,11 @@ public class Heathens {
         this.m = m;
         this.scale = 1;
         zoomOut = true;
-        this.m.frameCount = 0;
     }
 
     public void render() {
 
+        System.out.println(m.frameCount);
         //Used for syncing the song to raindrops
         rainSync();
 
@@ -48,7 +52,7 @@ public class Heathens {
                 m.d[i].bottom();
             }
             bouncingCircle();
-        } else if (m.frameCount >= secondDrop && m.frameCount <= 2826) // Transition part
+        } else if (m.frameCount >= secondDrop && m.frameCount <= 2750) // Transition part
         {
            m.background(47, 79, 79);
         }
@@ -71,7 +75,13 @@ public class Heathens {
         // Third drop of the song
         if (m.frameCount >= thirdDrop) {
             m.background(47, 79, 79);
-
+            if (zoomOut == true)
+            {
+                m.rect(m.width/2, m.height/2, m.width, m.height);
+                scale *= 1.005;
+            }
+            m.rect(m.width/2, m.height/2, m.width, m.height);
+            scale *= 1.004;
         }
         // exitIcon("Exit", m.width - 120, m.height - 120);
         // exitIconHover();
@@ -88,7 +98,7 @@ public class Heathens {
         m.strokeWeight(3);
 
         // Changes color of circle on the first drop of the song
-        if (m.frameCount > 1554) {
+        if (m.frameCount > firstDrop) {
             m.stroke(255);
             m.fill(47, 79, 79);
         } else {
