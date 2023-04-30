@@ -257,6 +257,8 @@ public class Monitor extends Visual
             d[i] = new Rain(this, random(0, width), random(-1000, 0));
         }
 
+        frameRate(60);
+        frameCount = 0;
         rectMode(CENTER);
     }
 
