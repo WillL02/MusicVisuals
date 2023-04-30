@@ -24,7 +24,7 @@ public class Rain {
     public void show() {
 
         //Rain changes color on the first beat drop
-        if (m.frameCount > 1559.1)
+        if (m.frameCount > 1474)
         {
            m.stroke(103, 183, 209);
         }

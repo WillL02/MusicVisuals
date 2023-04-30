@@ -16,9 +16,12 @@ public class Heathens {
     float secondDrop = 2746;
     float thirdDrop = 3391;
     float fourthDrop = 4195;
+    float fifthDrop = 6916;
 
     float scale;
     boolean zoomOut;
+    float backgroundCol;
+    boolean reverse;
 
 
     public Heathens(Monitor m) 
@@ -26,17 +29,20 @@ public class Heathens {
         this.m = m;
         this.scale = 1;
         zoomOut = true;
+        backgroundCol = 0;
+        reverse = false;
     }
 
     public void render() {
 
         System.out.println(m.frameCount);
+
         //Used for syncing the song to raindrops
         rainSync();
 
         
         // First drop of the song (Changes background)
-        if (m.frameCount >= firstDrop && m.frameCount <= 2760) {
+        if (m.frameCount >= firstDrop && m.frameCount <= secondDrop) {
             m.background(47, 79, 79);
 
         } else if (m.frameCount <= firstDrop) {
@@ -63,7 +69,7 @@ public class Heathens {
         m.translate(-m.width / 2 , -m.height / 2);
     
         // Second drop of the song (Start of rectangle visual)
-        if (m.frameCount >= secondDrop) {
+        if (m.frameCount >= secondDrop && m.frameCount <= fourthDrop) {
             if (zoomOut == true)
             {
                 rectVisual();
@@ -71,9 +77,8 @@ public class Heathens {
             }
         }
 
-        
         // Third drop of the song
-        if (m.frameCount >= thirdDrop) {
+        if (m.frameCount >= thirdDrop && m.frameCount <= fourthDrop) {
             m.background(47, 79, 79);
             if (zoomOut == true)
             {
@@ -82,6 +87,38 @@ public class Heathens {
             }
             m.rect(m.width/2, m.height/2, m.width, m.height);
             scale *= 1.004;
+            bouncingCircle();
+        }
+
+        //Fourth drop of the song
+        
+
+        if (m.frameCount >= fourthDrop)
+        {
+            m.background(backgroundCol);
+            bouncingCircle();
+            for (int i = 0; i < m.d.length; i++) {
+                m.d[i].fall(lerpedAverage);
+                m.d[i].show();
+                m.d[i].bottom();
+            }
+            if (backgroundCol == 255)
+            {
+                reverse = true;
+            }
+            else if (backgroundCol == 0)
+            {
+                reverse = false;
+            }
+
+            if (reverse == true)
+            {
+                backgroundCol--;
+            }
+            else 
+            {
+                backgroundCol++;
+            }
         }
         // exitIcon("Exit", m.width - 120, m.height - 120);
         // exitIconHover();
@@ -98,14 +135,32 @@ public class Heathens {
         m.strokeWeight(3);
 
         // Changes color of circle on the first drop of the song
-        if (m.frameCount > firstDrop) {
+        if (m.frameCount >= firstDrop && m.frameCount <= fourthDrop) 
+        {
             m.stroke(255);
             m.fill(47, 79, 79);
-        } else {
+        } 
+        else if (m.frameCount < firstDrop && m.frameCount <= fourthDrop) 
+        {
             m.stroke(255, 0, 0);
             m.fill(0);
         }
+
+        //Fourth Drop
+        if (m.frameCount >= fourthDrop)
+        {
+            m.stroke(2, 7, 93);
+            m.fill(backgroundCol);
+        }
+
+        //Fifth Drop
+        if (m.frameCount >= fifthDrop)
+        {
+            m.stroke(60, 0 , 8);
+        }
+        
         m.circle(halfwidth, halfheight, m.getSmoothedAmplitude() * 3000);
+        
     }
 
     // For syncing song to rain
@@ -153,4 +208,6 @@ public class Heathens {
     //         m.cursor(Monitor.ARROW); // Default curser everywhere else
     //     }
     // }
+
+    
 }
