@@ -17,6 +17,7 @@ public class Heathens {
     float thirdDrop = 3391;
     float fourthDrop = 4195;
     float fifthDrop = 6916;
+    float sixthDrop = 7240;
 
     float scale;
     boolean zoomOut;
@@ -91,9 +92,7 @@ public class Heathens {
         }
 
         //Fourth drop of the song
-        
-
-        if (m.frameCount >= fourthDrop)
+        if (m.frameCount >= fourthDrop && m.frameCount <= fifthDrop)
         {
             m.background(backgroundCol);
             bouncingCircle();
@@ -120,8 +119,33 @@ public class Heathens {
                 backgroundCol++;
             }
         }
-        // exitIcon("Exit", m.width - 120, m.height - 120);
-        // exitIconHover();
+
+        //Fifth drop of the song
+        if (m.frameCount >= fifthDrop)
+        {
+            m.background(0);
+            m.strokeWeight(5);
+            bouncingCircle();
+            for (int i = 0; i < m.d.length; i++) {
+                m.d[i].fall(lerpedAverage);
+                m.d[i].show();
+                m.d[i].bottom();
+            }
+            
+        }
+        //Sixth drop of the song
+        if (m.frameCount >= sixthDrop && m.frameCount <= sixthDrop + 3)
+        {
+            m.background(255);
+        }
+
+        if (m.frameCount >= sixthDrop + 3)
+        {
+            exitIcon("Exit", m.width - 120, m.height - 120);
+            exitIconHover();
+        }
+
+        
     }
 
     public void bouncingCircle() {
@@ -147,7 +171,7 @@ public class Heathens {
         }
 
         //Fourth Drop
-        if (m.frameCount >= fourthDrop)
+        if (m.frameCount >= fourthDrop && m.frameCount <= fifthDrop)
         {
             m.stroke(2, 7, 93);
             m.fill(backgroundCol);
@@ -157,6 +181,7 @@ public class Heathens {
         if (m.frameCount >= fifthDrop)
         {
             m.stroke(60, 0 , 8);
+            m.fill(0);
         }
         
         m.circle(halfwidth, halfheight, m.getSmoothedAmplitude() * 3000);
@@ -183,31 +208,31 @@ public class Heathens {
         m.rect(halfwidth, halfheight, m.width, m.height);
     }
 
-    // void exitIcon(String text, float x, float y) {
-    //     m.exit = m.loadImage("exit.png");
-    //     m.image(m.exit, x, y);
-    //     m.fill(0, 408, 612);
-    //     m.textSize(25);
-    //     m.text(text, x + 8, y + 77);
-    // }
+    void exitIcon(String text, float x, float y) {
+        m.exit = m.loadImage("exit.png");
+        m.image(m.exit, x, y);
+        m.fill(0, 408, 612);
+        m.textSize(25);
+        m.text(text, x + 8, y + 77);
+    }
     
-    // void exitIconHover() {
-    //     if (m.mouseX > m.width - 140 && m.mouseX < m.width - 20 && m.mouseY > m.height - 130 && m.mouseY < m.height - 20) {
-    //         m.cursor(Monitor.HAND); // Changes the curser when hovering over the icon
-    //         m.noStroke();
-    //         m.fill(49, 182, 255, 65);
-    //         m.rect(m.width - 92, m.height - 85, 100, 100);
-    //         // Exits the program if EXIT icon is pressed
-    //         if (m.mousePressed) {
-    //         m.song.pause();
-    //         m.minim.stop();
-    //         m.LoadComputer();
-
-    //         }
-    //     } else {
-    //         m.cursor(Monitor.ARROW); // Default curser everywhere else
-    //     }
-    // }
+    void exitIconHover() {
+        if (m.mouseX > m.width - 140 && m.mouseX < m.width - 20 && m.mouseY > m.height - 130 && m.mouseY < m.height - 20) {
+            m.cursor(Monitor.HAND); // Changes the curser when hovering over the icon
+            m.noStroke();
+            m.fill(49, 182, 255, 65);
+            m.rect(m.width - 92, m.height - 85, 100, 100);
+            // Exits the program if EXIT icon is pressed
+            if (m.mousePressed) {
+            m.song.pause();
+            m.minim.stop();
+            m.frameCount = 0;
+            m.LoadComputer();
+            }
+        } else {
+            m.cursor(Monitor.ARROW); // Default curser everywhere else
+        }
+    }
 
     
 }
