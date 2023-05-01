@@ -106,7 +106,7 @@ public class Star {
     
     public void backgroundStars()
     {
-        anmar.image(bStars, 0, 0);
+        anmar.image(bStars, 0, 0, anmar.width, anmar.height);
     }
     
     public void calculateVibration(float amplitude) 
