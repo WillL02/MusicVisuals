@@ -25,8 +25,8 @@ public class Stickman {
         
         for(int i = 0; i < sticks.length; i++)
         {
-            w = (float) (sticks[i].width * 0.2);
-            h = (float) (sticks[i].height * 0.2);
+            w = (float) (sticks[i].width);
+            h = (float) (sticks[i].height);
         }// end for
         
         x = anmar.random(w/2, anmar.width-w/2);
