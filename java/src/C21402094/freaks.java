@@ -216,9 +216,29 @@ public class freaks {
     void exitIcon(String text, float x, float y) {
         m.exit = m.loadImage("exit.png");
         m.image(m.exit, x, y);
-        m.fill(0, 408, 612);
+        m.fill(255, 0,0);
         m.textSize(25);
-        m.text(text, x + 8, y + 77);
+        m.text(text, x-24, y + 77);
+      }
+
+      void exitIconHover() {
+        if (m.mouseX > m.width - 140 && m.mouseX < m.width - 20 && m.mouseY > m.height - 130 && m.mouseY < m.height - 20) {
+          m.cursor(Monitor.HAND); // Changes the curser when hovering over the icon
+          m.noStroke();
+          m.fill(49, 182, 255, 65);
+          m.rect(m.width - 92, m.height - 85, 100, 100);
+          // Exits the program if EXIT icon is pressed
+          if (m.mousePressed) {
+            m.song.pause();
+            m.minim.stop();
+            m.frameCount = 0;
+            m.cursor(Monitor.ARROW); // Default curser everywhere else
+            //m.LoadComputer();
+           
+          }
+        } else {
+          m.cursor(Monitor.ARROW); // Default curser everywhere else
+        }
       }
 
     public float random(double d, double e) {
