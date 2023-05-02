@@ -102,6 +102,7 @@ public class Monitor extends Visual
         ap = minim.loadFile("TimmyTrumpet.mp3", 2048);
         ap.play();
         ab = ap.mix;
+        rectMode(CORNER);
     }
     
 

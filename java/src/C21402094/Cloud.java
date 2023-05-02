@@ -14,10 +14,10 @@ public class Cloud {
     public Cloud(freaks anmar)
     {
         w = 200;
-        h = anmar.random(65, 100);
-        x = anmar.random(w/2, anmar.m.width-w/2);
-        y = anmar.random(h/2, anmar.m.height-h/2);
-        ep = (int)anmar.random(0, 2);
+        h = anmar.m.random(65, 100);
+        x = anmar.m.random(w/2, anmar.m.width-w/2);
+        y = anmar.m.random(h/2, anmar.m.height-h/2);
+        ep = (int)anmar.m.random(0, 2);
         this.anmar = anmar;
     }// end functions
     
