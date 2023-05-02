@@ -5,6 +5,13 @@ import C21423244.Monitor;
 import ie.tudublin.*;
 
 public class freaks {
+    float angle = 0;
+    float lerpedAverage = 0;
+    float beatThreshold = 0.5f;
+
+    boolean ran = false;
+    int startTime, startTime2;
+
     Monitor m;
     float i;
 
@@ -62,7 +69,7 @@ public class freaks {
                 m.updatePixels();
 
                 // adjusts the speed of transition to space
-                i += 0.5;
+                i += 3;
 
             } // end if
             else {
@@ -100,6 +107,7 @@ public class freaks {
         else // if 15.5 seconds havent passed yet
         {
             m.background(r, g, b);// sky blue background
+            exitIcon("Exit", m.width - 120, m.height - 120);
 
             // when the clouds go off screen they dont come back
             if (m.frameCount >= 900) {
@@ -204,6 +212,14 @@ public class freaks {
             // } // end else
 
     }
+
+    void exitIcon(String text, float x, float y) {
+        m.exit = m.loadImage("exit.png");
+        m.image(m.exit, x, y);
+        m.fill(0, 408, 612);
+        m.textSize(25);
+        m.text(text, x + 8, y + 77);
+      }
 
     public float random(double d, double e) {
         return 0;
