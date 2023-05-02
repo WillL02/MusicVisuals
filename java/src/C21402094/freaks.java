@@ -6,6 +6,7 @@ import ie.tudublin.*;
 
 public class freaks {
     Monitor m;
+    int i;
 
     Cloud[] clouds = new Cloud[5];
     Stickman[] stickmen = new Stickman[16];
@@ -34,7 +35,7 @@ public class freaks {
         m.frameRate(60);
         m.frameCount = 0;
 
-        m.i = 1; 
+        i = 1; 
 
     }
 
@@ -61,7 +62,7 @@ public class freaks {
                 m.updatePixels();
 
                 // adjusts the speed of transition to space
-                m.i += 0.5;
+                i += 0.5;
 
             } // end if
             else {
