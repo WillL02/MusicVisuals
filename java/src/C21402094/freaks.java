@@ -32,7 +32,7 @@ public class freaks {
         }
 
         m.frameRate(60);
-        m.frameCount = 0;
+        m.frameCount = 900;
 
         m.i = 1; 
 
@@ -61,7 +61,7 @@ public class freaks {
                 m.updatePixels();
 
                 // adjusts the speed of transition to space
-                m.i += 1;
+                m.i += 3;
 
             } // end if
             else {
