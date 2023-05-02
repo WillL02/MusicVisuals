@@ -15,17 +15,10 @@ public class Main
         processing.core.PApplet.runSketch( a, new Monitor());		
 	}
 
-	// For testing Heathens visualizer
-	public void freaks()
-	{
-		String[] a = {"MAIN"};
-        processing.core.PApplet.runSketch( a, new freaks());		
-	}
-
 
 	public static void main(String[] args)
 	{
 		Main main = new Main();
-		main.freaks();
+		main.startUI();
 	}
 }

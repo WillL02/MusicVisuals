@@ -1,182 +1,156 @@
 package C21402094;
 
-import ddf.minim.AudioBuffer;
-import ddf.minim.AudioInput;
-import ddf.minim.AudioPlayer;
-import ddf.minim.Minim;
 
+import C21423244.Monitor;
 import ie.tudublin.*;
 
-public class freaks extends Visual{
-    float angle = 0, i;
-    float lerpedAverage = 0;
-    float beatThreshold = 0.5f;
-
-    boolean ran = false;
-    int startTime, startTime2;
-    int r = 135, g = 206, b = 235;
+public class freaks {
+    Monitor m;
 
     Cloud[] clouds = new Cloud[5];
     Stickman[] stickmen = new Stickman[16];
 
+    public int r = 135;
+    public int g = 206;
+    public int b = 235;
+
     blackHole bh;
     Star s;
 
-    Minim minim;
-    AudioInput ai;
-    AudioPlayer ap;
-    AudioBuffer ab;
 
-    public void settings() {
-        size(1344, 756, P2D);
-    }
-
-    public void setup() {
-        
+    public freaks(Monitor m) 
+    {
+        this.m = m;
         bh = new blackHole(this);
         s = new Star(this);
-
-        minim = new Minim(this);
-        ap = minim.loadFile("TimmyTrumpet.mp3", 2048);
-        ap.play();
-        ab = ap.mix;
+        for (int i = 0; i < clouds.length; i++) {
+            clouds[i] = new Cloud(this);
+        }
 
         for (int i = 0; i < stickmen.length; i++) {
             stickmen[i] = new Stickman(this);
         }
 
-        for (int i = 0; i < clouds.length; i++) {
-            clouds[i] = new Cloud(this);
-        }
+        m.frameRate(60);
+        m.frameCount = 0;
 
-        frameRate(60);
-        frameCount = 0;
+        m.i = 1; 
 
-        i = 1;
-    }// end function
+    }
 
-    public void draw() {
-        System.out.println(frameCount);
-        if (frameCount >= 960) // if 16 seconds have passed
-        {
-            if (i < height / 30) {
-                loadPixels();
-                for (int x = 0; x < width; x++) {
-                    for (int y = 0; y < height; y++) {
-                        float temp = y / i;
+    public void render() {
+            m.background(0);
+            s.backgroundStars();
 
-                        if (temp < 4) {
-                            temp = 0;
-                        }
-                        r = (int) freaks.map(temp, 0, height / 4, 0, 135);
-                        g = (int) freaks.map(temp, 0, height / 4, 0, 206);
-                        b = (int) freaks.map(temp, 0, height / 4, 0, 235);
+            if (m.frameCount >= 3190 && m.frameCount < 6612)// if 53.2 seconds have passed
+            {
+                bh.displayBlackHole(251, 139, 35);// turn orange
+                stickmen[0].displayWhite();
+            }
 
-                        pixels[x + y * width] = color(r, g, b);
-                    }
-                }
-                updatePixels();
+            else if (m.frameCount >= 6612 && m.frameCount < 7718) {
+                bh.displayBlackHole(0, 0, 255); // blue
+                stickmen[0].displayWhite();
+            }
 
-                // adjusts the speed of transition to space
-                i += 0.5;
-
+            else if (m.frameCount >= 7718) {
+                bh.displayBlackHole(255, 0, 0); // red
+                stickmen[0].displayWhite();
             } // end if
             else {
-                background(0);
-                s.backgroundStars();
-
-                if (frameCount >= 3190 && frameCount < 6612)// if 53.2 seconds have passed
-                {
-                    bh.displayBlackHole(251, 139, 35);// turn orange
-                    stickmen[0].displayWhite();
-                }
-
-                else if (frameCount >= 6612 && frameCount < 7718) {
-                    bh.displayBlackHole(0, 0, 255); // blue
-                    stickmen[0].displayWhite();
-                }
-
-                else if (frameCount >= 7718) {
-                    bh.displayBlackHole(255, 0, 0); // red
-                    stickmen[0].displayWhite();
+                if (m.frameCount >= 10200) {
+                    bh.displayBlackHole(1, 1, 1);
                 } // end if
                 else {
-                    if (frameCount >= 10200) {
-                        bh.displayBlackHole(1, 1, 1);
-                    } // end if
-                    else {
-                        bh.displayBlackHole(255, 255, 255);
-                    } // end else
-
+                    bh.displayBlackHole(255, 255, 255);
                 } // end else
 
-            } // end outer else
+            } // end else
+        // System.out.println(m.frameCount);
+        //     if (m.i < m.height / 30) {
+        //         m.loadPixels();
+        //         for (int x = 0; x < m.width; x++) {
+        //             for (int y = 0; y < m.height; y++) {
+        //                 float temp = y / m.i;
 
-        } // end if
-        else // if 15.5 seconds havent passed yet
-        {
-            background(r, g, b);// sky blue background
+        //                 if (temp < 4) {
+        //                     temp = 0;
+        //                 }
+        //                 r = (int) Monitor.map(temp, 0, m.height / 4, 0, 135);
+        //                 g = (int) Monitor.map(temp, 0, m.height / 4, 0, 206);
+        //                 b = (int) Monitor.map(temp, 0, m.height / 4, 0, 235);
 
-            // when the clouds go off screen they dont come back
-            if (frameCount >= 900) {
-                ran = true;
-            }
+        //                 m.pixels[x + y * m.width] = m.color(r, g, b);
+        //             }
+        //         }
+        //         m.updatePixels();
 
-            for (int i = 0; i < clouds.length; i++) {
-                clouds[i].displayCloud();
-                clouds[i].moveCloud(ran);
-            }
+        //         // adjusts the speed of transition to space
+        //         m.i += 0.5;
+        //     }
+        //     else // if 15.5 seconds havent passed yet
+        //     {
+        //         m.background(r, g, b);// sky blue background
 
-            for (int i = 0; i < clouds.length; i++) {
-                for (int j = 0; j < clouds.length; j++) {
-                    // if they overlap move their position
-                    if (clouds[i].overlaps(clouds[j]) && i != j) {
-                        float dx = clouds[i].x - clouds[j].x;
-                        float dy = clouds[i].y - clouds[j].y;
-                        float angle = freaks.atan2(dy, dx);
-                        float distance = (float) ((clouds[i].w / 1.5) + (clouds[j].w / 1.5)
-                                - freaks.dist(clouds[i].x, clouds[i].y, clouds[j].x, clouds[j].y));
-                        float newX = clouds[i].x + freaks.cos(angle) * distance;
-                        float newY = clouds[i].y + freaks.sin(angle) * distance;
-                        clouds[i].x = newX;
-                        clouds[i].y = newY;
+        //         // when the clouds go off screen they dont come back
+        //         if (m.frameCount >= 900) {
+        //             m.ran = true;
+        //         }
 
-                    } // end if
+        //         for (int i = 0; i < clouds.length; i++) {
+        //             clouds[i].displayCloud();
+        //             clouds[i].moveCloud(m.ran);
+        //         }
 
-                } // end inner for
+        //         for (int i = 0; i < clouds.length; i++) {
+        //             for (int j = 0; j < clouds.length; j++) {
+        //                 // if they overlap move their position
+        //                 if (clouds[i].overlaps(clouds[j]) && i != j) {
+        //                     float dx = clouds[i].x - clouds[j].x;
+        //                     float dy = clouds[i].y - clouds[j].y;
+        //                     float angle = Monitor.atan2(dy, dx);
+        //                     float distance = (float) ((clouds[i].w / 1.5) + (clouds[j].w / 1.5)
+        //                             - Monitor.dist(clouds[i].x, clouds[i].y, clouds[j].x, clouds[j].y));
+        //                     float newX = clouds[i].x + Monitor.cos(angle) * distance;
+        //                     float newY = clouds[i].y + Monitor.sin(angle) * distance;
+        //                     clouds[i].x = newX;
+        //                     clouds[i].y = newY;
 
-            } // end outer for
+        //                 } // end if
 
-            // Stickmen
-            for (int i = 0; i < stickmen.length; i++) {
-                stickmen[i].display();
-                stickmen[i].move();
-            }
+        //             } // end inner for
 
-            for (int i = 0; i < stickmen.length; i++) {
-                for (int j = 0; j < stickmen.length; j++) {
+        //         } // end outer for
 
-                    if (stickmen[i].overlaps(stickmen[j]) && i != j) {
-                        float tx = stickmen[i].x - stickmen[j].x;
-                        float ty = stickmen[i].y - stickmen[j].y;
-                        float angle = freaks.atan2(ty, tx);
-                        float distance = (float) ((stickmen[i].w / 1.5) + (stickmen[j].w / 1.5)
-                                - freaks.dist(stickmen[i].x, stickmen[i].y, stickmen[j].x, stickmen[j].y));
-                        float newX = stickmen[i].x + freaks.cos(angle) * distance;
-                        float newY = stickmen[i].y + freaks.sin(angle) * distance;
-                        stickmen[i].x = newX;
-                        stickmen[i].y = newY;
-                    } // end if
+        //         // // Stickmen
+        //         // for (int i = 0; i < stickmen.length; i++) {
+        //         //     stickmen[i].display();
+        //         //     stickmen[i].move();
+        //         // }
 
-                } // end inner for
+        //         // for (int i = 0; i < stickmen.length; i++) {
+        //         //     for (int j = 0; j < stickmen.length; j++) {
 
-            } // end outer for
+        //         //         if (stickmen[i].overlaps(stickmen[j]) && i != j) {
+        //         //             float tx = stickmen[i].x - stickmen[j].x;
+        //         //             float ty = stickmen[i].y - stickmen[j].y;
+        //         //             float angle = Monitor.atan2(ty, tx);
+        //         //             float distance = (float) ((stickmen[i].w / 1.5) + (stickmen[j].w / 1.5)
+        //         //                     - Monitor.dist(stickmen[i].x, stickmen[i].y, stickmen[j].x, stickmen[j].y));
+        //         //             float newX = stickmen[i].x + Monitor.cos(angle) * distance;
+        //         //             float newY = stickmen[i].y + Monitor.sin(angle) * distance;
+        //         //             stickmen[i].x = newX;
+        //         //             stickmen[i].y = newY;
+        //         //         } // end if
 
-        } // else
-    }// end function
+        //         //     } // end inner for
+
+        //         // } // end outer for
+
+        //     } // else
+    }
 
     public float random(double d, double e) {
         return 0;
     }
-
 }

@@ -1,26 +1,32 @@
 package C21402094;
 
+import C21423244.Monitor;
 import processing.core.PImage;
 
 public class Stickman {
-    freaks anmar = new freaks();
+    Monitor m;
+    freaks anmar;
 
     PImage[] sticks = new PImage[18];
     PImage whiteStick;
-    float x = anmar.height/2, y = anmar.width/2;
+    float x,y;
     float w, h;
     int i = 0;
     boolean done = false;
-    float angle = anmar.random(0, 360);
+    float angle;
     float rotationSpeed = (float) 0.05;
 
 
     public Stickman(freaks anmar)
     { 
         this.anmar = anmar;
+        this.m = anmar.m;
+        x = anmar.m.height/2;
+        y = anmar.m.width/2;
+        angle = anmar.m.random(0, 360);
         for(int i = 0; i < sticks.length; i++)
         {
-            sticks[i] = anmar.loadImage("stickman/"+i+".png");
+            sticks[i] = anmar.m.loadImage("stickman/"+i+".png");
         }// end for
         
         for(int i = 0; i < sticks.length; i++)
@@ -29,17 +35,17 @@ public class Stickman {
             h = (float) (sticks[i].height);
         }// end for
         
-        x = anmar.random(w/2, anmar.width-w/2);
-        y = anmar.random(h/2, anmar.height-h/2);
+        x = anmar.m.random(w/2, anmar.m.width-w/2);
+        y = anmar.m.random(h/2, anmar.m.height-h/2);
         
-        whiteStick = anmar.loadImage("stickman-white.png");
+        whiteStick = anmar.m.loadImage("stickman-white.png");
         
     }// end constructor
         
     void display()
     {
-        anmar.imageMode(freaks.CENTER); 
-        anmar.image(sticks[i], x, y, w, h);
+        anmar.m.imageMode(Monitor.CENTER); 
+        anmar.m.image(sticks[i], x, y, w, h);
         
         // if index has not reached length and not made it to length yet
         if(i < sticks.length && !done)
@@ -60,7 +66,7 @@ public class Stickman {
         
     void displayWhite()
     {
-        float centerRadius = anmar.height/3;
+        float centerRadius = anmar.m.height/3;
         float w = (float) (whiteStick.width * 0.06); 
         float h = (float) (whiteStick.height * 0.06);
         
@@ -69,16 +75,16 @@ public class Stickman {
         this.angle += rotationSpeed; 
 
         // Calculate position on curved circle based on black hole radius
-        anmar.pushMatrix();
-        anmar.translate(anmar.width / 2, anmar.height / 2);
-        anmar.rotate(freaks.radians(angle));
-        anmar.translate(centerRadius, 0);
+        anmar.m.pushMatrix();
+        anmar.m.translate(anmar.m.width / 2, anmar.m.height / 2);
+        anmar.m.rotate(Monitor.radians(angle));
+        anmar.m.translate(centerRadius, 0);
         
-        anmar.imageMode(freaks.CENTER); 
-        anmar.image(whiteStick, 0, 0, w, h);
+        anmar.m.imageMode(Monitor.CENTER); 
+        anmar.m.image(whiteStick, 0, 0, w, h);
         
-        anmar.popMatrix();
-        anmar.resetMatrix();
+        anmar.m.popMatrix();
+        anmar.m.resetMatrix();
         
         // update position and rotation of the star
         this.angle += rotationSpeed;
@@ -100,7 +106,7 @@ public class Stickman {
         
     boolean overlaps(Stickman object)
     {
-        float d = freaks.dist(x, y, object.x, object.y);
+        float d = Monitor.dist(x, y, object.x, object.y);
         
         return (d < (w/2) + (object.w/2) && d < (h/2) + (object.h/2));
     }// end function

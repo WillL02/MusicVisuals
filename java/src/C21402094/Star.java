@@ -1,9 +1,11 @@
 package C21402094;
 
+import C21423244.Monitor;
 import processing.core.PImage;
 
 public class Star {
-    freaks anmar = new freaks();
+    freaks anmar;
+    Monitor m;
 
     float x, y, radius;
     float angle, rotationSpeed;
@@ -17,68 +19,69 @@ public class Star {
     
     public Star(float x, float y, float radius, float rotationSpeed, freaks anmar) 
     {
-        this.angle = anmar.random(0, 360);
+        this.m = anmar.m;
+        this.angle = anmar.m.random(0, 360);
         this.x = x;
         this.y = y;
         this.radius = radius;
         this.rotationSpeed = rotationSpeed;
-        this.streakLength = anmar.random(10, 20);
+        this.streakLength = anmar.m.random(10, 20);
         this.streakAngle = angle;
         this.anmar = anmar;
     }
     
     public Star(freaks anmar)
     {
-        bStars = anmar.loadImage("starsBackground.jpg");
+        bStars = anmar.m.loadImage("starsBackground.jpg");
         this.anmar = anmar;
     }
     
     public void display(float amplitude) 
     {
         // update angle based on rotation speed and amplitude
-        angle += rotationSpeed + freaks.map(amplitude, 0, 1, 0, (float) 0.5);
+        angle += rotationSpeed + Monitor.map(amplitude, 0, 1, 0, (float) 0.5);
         
         // calculate position based on angle and radius
-        float xPos = x + freaks.cos(freaks.radians(angle)) * radius;
-        float yPos = y + freaks.sin(freaks.radians(angle)) * radius;
+        float xPos = x + Monitor.cos(Monitor.radians(angle)) * radius;
+        float yPos = y + Monitor.sin(Monitor.radians(angle)) * radius;
         
         calculateVibration(amplitude);
         
         // calculate streak angle based on direction of motion
         float dx = xPos - x;
         float dy = yPos - y;
-        float direction = freaks.atan2(dy, dx);
-        float streakAngle = direction - freaks.PI / 2;
+        float direction = Monitor.atan2(dy, dx);
+        float streakAngle = direction - Monitor.PI / 2;
         
         // draw streak
-        float streakX = xPos + freaks.cos(streakAngle) * streakLength;
-        float streakY = yPos + freaks.sin(streakAngle) * streakLength;
-        anmar.stroke(255, 255, 255, 100);
-        anmar.strokeWeight(3);
-        anmar.line(xPos, yPos, streakX, streakY);
+        float streakX = xPos + Monitor.cos(streakAngle) * streakLength;
+        float streakY = yPos + Monitor.sin(streakAngle) * streakLength;
+        anmar.m.stroke(255, 255, 255, 100);
+        anmar.m.strokeWeight(3);
+        anmar.m.line(xPos, yPos, streakX, streakY);
         
         
-        anmar.pushMatrix();
-        anmar.translate(x, y);
-        anmar.rotate(freaks.radians(angle));
-        anmar.translate(radius, 0);
+        anmar.m.pushMatrix();
+        anmar.m.translate(x, y);
+        anmar.m.rotate(Monitor.radians(angle));
+        anmar.m.translate(radius, 0);
     
         drawStar(0, 0, 6);
         
-        anmar.popMatrix();
-        
+        anmar.m.popMatrix();
+    
     }
     
     public void drawStar(float centerX, float centerY, float w)
     {
-        anmar.stroke(255); 
-        anmar.strokeWeight(2);
+        anmar.m.stroke(255); 
+        anmar.m.strokeWeight(2);
         
         // calculate the coordinates of the points of the star
         float radius;
         float outerRadius = w / 2;
         float innerRadius = (float) (outerRadius / 2.5);
-        float angle = freaks.TWO_PI / 5;
+        float angle = Monitor.TWO_PI / 5;
         float[] xPoints = new float[10];
         float[] yPoints = new float[10];
         for (int i = 0; i < 10; i++) 
@@ -91,30 +94,30 @@ public class Star {
             {
                 radius = innerRadius;
             }
-            xPoints[i] = centerX + radius * freaks.cos(i * angle);
-            yPoints[i] = centerY + radius * freaks.sin(i * angle);
+            xPoints[i] = centerX + radius * Monitor.cos(i * angle);
+            yPoints[i] = centerY + radius * Monitor.sin(i * angle);
         }
         
         // draw star
-        anmar.beginShape();
+        anmar.m.beginShape();
         for (int i = 0; i < 10; i++) 
         {
-            anmar.vertex(xPoints[i], yPoints[i]);
+            anmar.m.vertex(xPoints[i], yPoints[i]);
         }
-        anmar.endShape(freaks.CLOSE);
+        anmar.m.endShape(Monitor.CLOSE);
     }
     
     public void backgroundStars()
     {
-        anmar.imageMode(anmar.CORNER);
-        anmar.image(bStars, 0, 0, anmar.width, anmar.height);
+        anmar.m.imageMode(anmar.m.CORNER);
+        anmar.m.image(bStars, 0, 0, anmar.m.width, anmar.m.height);
     }
     
     public void calculateVibration(float amplitude) 
     {
-        smoothedAmplitude = freaks.lerp(smoothedAmplitude, amplitude, (float) 0.1);
-        float vibration = freaks.map(smoothedAmplitude, 0, 1, 0, maxVibration);
-        x += anmar.random(-vibration, vibration);
-        y += anmar.random(-vibration, vibration);
+        smoothedAmplitude = Monitor.lerp(smoothedAmplitude, amplitude, (float) 0.1);
+        float vibration = Monitor.map(smoothedAmplitude, 0, 1, 0, maxVibration);
+        x += anmar.m.random(-vibration, vibration);
+        y += anmar.m.random(-vibration, vibration);
     }
 }
