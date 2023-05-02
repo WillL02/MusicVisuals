@@ -61,7 +61,7 @@ public class freaks {
                 m.updatePixels();
 
                 // adjusts the speed of transition to space
-                m.i += 3;
+                m.i += 2;
 
             } // end if
             else {
