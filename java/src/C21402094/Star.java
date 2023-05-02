@@ -106,6 +106,7 @@ public class Star {
     
     public void backgroundStars()
     {
+        anmar.imageMode(anmar.CORNER);
         anmar.image(bStars, 0, 0, anmar.width, anmar.height);
     }
     

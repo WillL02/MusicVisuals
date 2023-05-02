@@ -3,7 +3,6 @@ package C21402094;
 public class blackHole {
     freaks anmar = new freaks();
 
-    float x = anmar.width/2, y = anmar.height/2, w = anmar.height/3;
     float x2, y2, shakeX, shakeY;
     float radius;
     float amplitude;
@@ -11,17 +10,21 @@ public class blackHole {
     boolean ran;
     Star[] stars = new Star[50];
     float r2,g2,b2;
+    float x,y,w;
 
     public blackHole(freaks anmar)
     {
         radius = (float) (w*1.5);
         ran = false;
         this.anmar = anmar;
+        x = anmar.width/2;
+        y = anmar.height/2;
+        w = anmar.height/3;
         
         for (int i = 0; i < stars.length; i++) 
         {
             float rotationSpeed = anmar.random(0.01, 0.05);
-            float radius = anmar.random(this.radius * 1.2, this.radius * 1.5);
+            radius = anmar.random(432, 540);
             stars[i] = new Star(x, y, radius, rotationSpeed, anmar);
         }// end for
     }// end constructor

@@ -49,13 +49,15 @@ public class freaks extends Visual{
             clouds[i] = new Cloud(this);
         }
 
+        frameRate(60);
         frameCount = 0;
 
         i = 1;
     }// end function
 
     public void draw() {
-        if (frameCount >= 720) // if 14 seconds have passed
+        System.out.println(frameCount);
+        if (frameCount >= 960) // if 16 seconds have passed
         {
             if (i < height / 30) {
                 loadPixels();
@@ -66,9 +68,9 @@ public class freaks extends Visual{
                         if (temp < 4) {
                             temp = 0;
                         }
-                        r = (int) map(temp, 0, height / 4, 0, 135);
-                        g = (int) map(temp, 0, height / 4, 0, 206);
-                        b = (int) map(temp, 0, height / 4, 0, 235);
+                        r = (int) freaks.map(temp, 0, height / 4, 0, 135);
+                        g = (int) freaks.map(temp, 0, height / 4, 0, 206);
+                        b = (int) freaks.map(temp, 0, height / 4, 0, 235);
 
                         pixels[x + y * width] = color(r, g, b);
                     }
@@ -83,11 +85,20 @@ public class freaks extends Visual{
                 background(0);
                 s.backgroundStars();
 
-                if (frameCount >= 2842)// if 47.35 seconds have passed
+                if (frameCount >= 3190 && frameCount < 6612)// if 53.2 seconds have passed
                 {
-                    bh.displayBlackHole(251, 139, 35);
+                    bh.displayBlackHole(251, 139, 35);// turn orange
                     stickmen[0].displayWhite();
+                }
 
+                else if (frameCount >= 6612 && frameCount < 7718) {
+                    bh.displayBlackHole(0, 0, 255); // blue
+                    stickmen[0].displayWhite();
+                }
+
+                else if (frameCount >= 7718) {
+                    bh.displayBlackHole(255, 0, 0); // red
+                    stickmen[0].displayWhite();
                 } // end if
                 else {
                     if (frameCount >= 10200) {
@@ -107,7 +118,7 @@ public class freaks extends Visual{
             background(r, g, b);// sky blue background
 
             // when the clouds go off screen they dont come back
-            if (frameCount >= 660) {
+            if (frameCount >= 900) {
                 ran = true;
             }
 
@@ -122,11 +133,11 @@ public class freaks extends Visual{
                     if (clouds[i].overlaps(clouds[j]) && i != j) {
                         float dx = clouds[i].x - clouds[j].x;
                         float dy = clouds[i].y - clouds[j].y;
-                        float angle = atan2(dy, dx);
+                        float angle = freaks.atan2(dy, dx);
                         float distance = (float) ((clouds[i].w / 1.5) + (clouds[j].w / 1.5)
-                                - dist(clouds[i].x, clouds[i].y, clouds[j].x, clouds[j].y));
-                        float newX = clouds[i].x + cos(angle) * distance;
-                        float newY = clouds[i].y + sin(angle) * distance;
+                                - freaks.dist(clouds[i].x, clouds[i].y, clouds[j].x, clouds[j].y));
+                        float newX = clouds[i].x + freaks.cos(angle) * distance;
+                        float newY = clouds[i].y + freaks.sin(angle) * distance;
                         clouds[i].x = newX;
                         clouds[i].y = newY;
 
@@ -148,11 +159,11 @@ public class freaks extends Visual{
                     if (stickmen[i].overlaps(stickmen[j]) && i != j) {
                         float tx = stickmen[i].x - stickmen[j].x;
                         float ty = stickmen[i].y - stickmen[j].y;
-                        float angle = atan2(ty, tx);
+                        float angle = freaks.atan2(ty, tx);
                         float distance = (float) ((stickmen[i].w / 1.5) + (stickmen[j].w / 1.5)
-                                - dist(stickmen[i].x, stickmen[i].y, stickmen[j].x, stickmen[j].y));
-                        float newX = stickmen[i].x + cos(angle) * distance;
-                        float newY = stickmen[i].y + sin(angle) * distance;
+                                - freaks.dist(stickmen[i].x, stickmen[i].y, stickmen[j].x, stickmen[j].y));
+                        float newX = stickmen[i].x + freaks.cos(angle) * distance;
+                        float newY = stickmen[i].y + freaks.sin(angle) * distance;
                         stickmen[i].x = newX;
                         stickmen[i].y = newY;
                     } // end if
@@ -162,7 +173,6 @@ public class freaks extends Visual{
             } // end outer for
 
         } // else
-
     }// end function
 
     public float random(double d, double e) {
