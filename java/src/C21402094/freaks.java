@@ -76,18 +76,18 @@ public class freaks {
                 exitIcon("Exit", m.width - 120, m.height - 120);
                 exitIconHover();
 
-                if (m.frameCount >= 3309 && m.frameCount < 6748)// if 53.2 seconds have passed
+                if (m.frameCount >= 3300 && m.frameCount < 6733)// if 53.2 seconds have passed
                 {
                     bh.displayBlackHole(251, 139, 35);// turn orange
                     stickmen[0].displayWhite();
                 }
 
-                else if (m.frameCount >= 6748 && m.frameCount < 7828) {
+                else if (m.frameCount >= 6733 && m.frameCount < 7831) {
                     bh.displayBlackHole(0, 0, 255); // blue
                     stickmen[0].displayWhite();
                 }
 
-                else if (m.frameCount >= 7828) {
+                else if (m.frameCount >= 7831) {
                     bh.displayBlackHole(255, 0, 0); // red
                     stickmen[0].displayWhite();
                 } // end if
