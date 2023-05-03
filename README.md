@@ -35,6 +35,22 @@ After being called from the Monitor, the Heathens file is run. My AudioVisual ha
 # Anmar
 When called from Monitor.java through mouse click, is is the third one displayed called "visual3.exe". When it runs a collction of stickmen objects are randomly placed on the screen and are using a collision detect function to stop them from overlapping. Along with stickmen is cloud objects that are displayed randomly also and also use an Anti overlap function. After a set time to match the first beat drop, the transition to space starts and the clouds and stickmen disappear revealing a black hole that reacts to the music with star objects orbiting around the black hole which also react to the music by shaking and orbit rotation speed increases. The black hole has lines that are behind the black hole and are connected from the centre of the circle to just outside its radius which react to the music too while showing a wave pattern when the beat is high. The lines for the black hole change colour when the beat drops the second time while revealing a single stickman orbiting around the black hole unaffected by the music.
 
+# List of classes/assets
+
+| Class/asset   | Source        |
+| ------------- | ------------- |
+| Monitor.java   | C21423244  |
+| SafeandSound.java  | C21379483  |
+| Mouse.java  | C21379483  |
+| Heathens.java  | C21318233  |
+| Rain.java  | C21318233   |
+| blackhole.java  | C21402094  |
+| Cloud.java  | C21402094  |
+| freaks.java  | C21402094  |
+| Star.java  | C21402094  |
+| Stickman.java  | C21402094  |
+| Star.java  | C21402094  |
+| Stickman.java  | C21402094  |
 
 # What I am most proud of in the assignment
 
@@ -50,6 +66,8 @@ The part of my visualizer I am most proud of is the rectangle visual where is zo
 ## Anmar
 I think I'm most proud of the stickmen because I wasnt expecting them to turn out how they did. I'm also very proud of the stars how they shake and orbit around the blackhole and the lines on the blackhole that make a wavee patern when the beat is high.
 
+# Screenshots
+here.
 
 # Preview of Assignmnet
 ## Máte
