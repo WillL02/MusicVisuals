@@ -30,7 +30,7 @@ The monitor screen works as a base for all the visualizers to be played.
 Write about how your visualizer works here. Remove heading once finished. Write in order of appearance.
 
 # Ciaran
-Write about how your visualizer works here. Remove heading once finished. Write in order of appearance.
+After being called from the Monitor, the Heathens file is run. My AudioVisual has multiple beat drops (6 in total) in which something in the visual will change. From the start there is a circle and a rain visual that reacts with the song. The circle gets larger and the rain falls faster depending on the song. The first drop of the song changes the color of the background, circle and rain. The second drop starts the rectangle visual where the whole screen zooms in while rectangles are drawn creating the effect of a rectangle slowly becoming smaller. The third drop then starts to zoom the screen out while the rectangle becomes bigger with a circle in the middle of the rectangle reacting to the music. The fourth drop returns to the bouncing circle and rain just as the rectangle is about to fill the screen. The fifth drop is another color change and the final sixth drop flashes the screen white to simulate a lightning strike.
 
 # Anmar
 Write about how your visualizer works here. Remove heading once finished. Write in order of appearance.
@@ -45,7 +45,7 @@ Im most proud of the combination of all the team's work into one working applica
 Write about what you are proud of in terms of your visualizer. Keep heading once finished.
 
 ## Ciaran
-Write about what you are proud of in terms of your visualizer. Keep heading once finished.
+The part of my visualizer I am most proud of is the rectangle visual where is zooms the whole screen in and while zooming out the bouncing circle zooms out with the rectangle. I am also proud of how I was able to sync the rain with the music.
 
 ## Anmar
 Write about what you are proud of in terms of your visualizer. Keep heading once finished.

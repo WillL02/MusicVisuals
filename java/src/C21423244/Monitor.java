@@ -240,11 +240,6 @@ public class Monitor extends Visual
         alreadyStarted = false;
         rectMode(CORNER);
         colorMode(RGB);
-        if(visualActive == 0) 
-        {
-            // exitIconMain("Exit", width - 120, height - 120);
-            // exitIconHoverMain();
-        }
     }
 
     public void LoadFreaks() 
@@ -331,11 +326,6 @@ public class Monitor extends Visual
         textSize(80);
         text("Loading...", 800,800);
         computerStarted = true;
-        if(visualActive == 0) 
-        {
-            // exitIconMain("Exit", width - 120, height - 120);
-            // exitIconHoverMain();
-        }
            
     }
 
@@ -448,13 +438,7 @@ public class Monitor extends Visual
     
     }
 
-    void exitIconMain(String text, float x, float y) {
-        exit = loadImage("exit.png");
-        image(exit, x, y);
-        fill(255, 0,0);
-        textSize(25);
-        text(text, x+8, y + 77);
-    }
+    
 
     private void wait(int waitSeconds) 
     {
