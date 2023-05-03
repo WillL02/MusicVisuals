@@ -67,7 +67,10 @@ The part of my visualizer I am most proud of is the rectangle visual where is zo
 I think I'm most proud of the stickmen because I wasnt expecting them to turn out how they did. I'm also very proud of the stars how they shake and orbit around the blackhole and the lines on the blackhole that make a wavee patern when the beat is high.
 
 # Screenshots
-here.
+![Alt text](images/Monitor.PNG "Monitor")
+![Alt text](images/freaks.PNG "Monitor")
+![Alt text](images/heathens.PNG "Monitor")
+![Alt text](images/safeandsound.PNG "Monitor")
 
 # Preview of Assignmnet
 ## Máte
