@@ -37,8 +37,6 @@ public class Heathens {
 
     public void render() {
 
-        System.out.println(m.frameCount);
-
         //Used for syncing the song to raindrops
         rainSync();
 

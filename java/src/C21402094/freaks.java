@@ -16,7 +16,7 @@ public class freaks {
     float i;
 
     Cloud[] clouds = new Cloud[5];
-    Stickman[] stickmen = new Stickman[16];
+    Stickman[] stickmen = new Stickman[30];
 
     public int r = 135;
     public int g = 206;

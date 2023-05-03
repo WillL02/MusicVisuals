@@ -240,8 +240,11 @@ public class Monitor extends Visual
         alreadyStarted = false;
         rectMode(CORNER);
         colorMode(RGB);
-        exitIcon("Exit", width - 120, height - 120);
-        exitIconHover();
+        if(visualActive == 0) 
+        {
+            // exitIconMain("Exit", width - 120, height - 120);
+            // exitIconHoverMain();
+        }
     }
 
     public void LoadFreaks() 
@@ -328,8 +331,11 @@ public class Monitor extends Visual
         textSize(80);
         text("Loading...", 800,800);
         computerStarted = true;
-        exitIcon("Exit", width - 120, height - 120);
-        exitIconHover(); 
+        if(visualActive == 0) 
+        {
+            // exitIconMain("Exit", width - 120, height - 120);
+            // exitIconHoverMain();
+        }
            
     }
 
@@ -396,8 +402,6 @@ public class Monitor extends Visual
         desktopIcon("Visual1.exe","icon1.png", screenX+20, screenY+10);
         desktopIcon("Visual2.exe", "icon2.png", screenX+20, screenY+100);
         desktopIcon("Visual3.exe", "icon3.png", screenX+20, screenY+190);
-        exitIcon("Exit", width - 120, height - 120);
-        exitIconHover();
     }
 
     public void desktopIcon(String text, String imgName, float x, float y) 
@@ -415,6 +419,7 @@ public class Monitor extends Visual
        {
         if(alreadyStarted == false) {
             rect(531, 86, 91, 50+30);
+            frameCount = 0;
             LoadSafeAndSound();
             visualActive = 1;
             alreadyStarted = true;
@@ -443,31 +448,12 @@ public class Monitor extends Visual
     
     }
 
-    void exitIcon(String text, float x, float y) {
+    void exitIconMain(String text, float x, float y) {
         exit = loadImage("exit.png");
         image(exit, x, y);
         fill(255, 0,0);
         textSize(25);
         text(text, x+8, y + 77);
-    }
-    
-    void exitIconHover() {
-        if(mouseX > width - 140 && mouseX < width - 20 && mouseY > height - 130 && mouseY < height - 20) 
-        {
-            cursor(Monitor.HAND); // Changes the curser when hovering over the icon
-            noStroke();
-            fill(49, 182, 255, 65);
-            fill(49, 182, 255, 65);
-            rect(width - 140, height - 130, 100, 100);
-
-            // Exits the program if EXIT icon is pressed
-            if (mousePressed) {
-                exit();
-            }
-        } else 
-        {
-            cursor(Monitor.ARROW); // Default curser everywhere else
-        }
     }
 
     private void wait(int waitSeconds) 

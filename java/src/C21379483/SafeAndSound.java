@@ -21,6 +21,7 @@ public class SafeAndSound {
   public SafeAndSound(Monitor m) 
   {
     this.m = m;
+    m.frameCount = 0;
   }
 
   public void render() {
