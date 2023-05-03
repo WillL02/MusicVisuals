@@ -12,12 +12,12 @@ public class Heathens {
     // float firstDrop = 1553;
     // float secondDrop = 2820;
     // float thirdDrop = 3462;
-    float firstDrop = 1474;
-    float secondDrop = 2746;
-    float thirdDrop = 3391;
-    float fourthDrop = 4195;
-    float fifthDrop = 6916;
-    float sixthDrop = 7240;
+    float firstDrop = 1474; //Change color
+    float secondDrop = 2746;//Enter rectVisual
+    float thirdDrop = 3391; //Second part of rectVisual
+    float fourthDrop = 4195; // Back to bouncing circle visual
+    float fifthDrop = 6916; //Color change
+    float sixthDrop = 7240; //Color change
 
     float scale;
     boolean zoomOut;
@@ -139,9 +139,10 @@ public class Heathens {
             m.background(255);
         }
 
-        if (m.frameCount >= sixthDrop + 3)
+        if (m.frameCount < secondDrop || m.frameCount > fourthDrop)
         {
             exitIcon("Exit", m.width - 120, m.height - 120);
+            exitIconHover();
         }
 
         
@@ -210,9 +211,9 @@ public class Heathens {
     void exitIcon(String text, float x, float y) {
         m.exit = m.loadImage("exit.png");
         m.image(m.exit, x, y);
-        m.fill(0, 408, 612);
+        m.fill(255, 0,0);
         m.textSize(25);
-        m.text(text, x + 8, y + 77);
+        m.text(text, x+8, y + 77);
     }
     
     void exitIconHover() {
@@ -223,14 +224,17 @@ public class Heathens {
             m.rect(m.width - 92, m.height - 85, 100, 100);
             // Exits the program if EXIT icon is pressed
             if (m.mousePressed) {
-            m.song.pause();
-            m.minim.stop();
-            m.frameCount = 0;
-            m.LoadComputer();
+  
+              m.getAudioPlayer().pause();
+              m.getMinim().stop();
+              m.frameCount = 0;
+              m.cursor(Monitor.ARROW); // Default curser everywhere else
+              m.LoadComputer();
+             
             }
-        } else {
+          } else {
             m.cursor(Monitor.ARROW); // Default curser everywhere else
-        }
+          }
     }
 
     
