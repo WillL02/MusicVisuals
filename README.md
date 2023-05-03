@@ -37,7 +37,7 @@ When called from Monitor.java through mouse click, is is the third one displayed
 
 
 # What I am most proud of in the assignment
-I think I'm most proud of the stickmen because I wasnt expecting them to turn out how they did. I'm also very proud of the stars how they shake and orbit around the blackhole and the lines on the blackhole that make a wavee patern when the beat is high.
+
 
 ## William
 Im most proud of the combination of all the team's work into one working application and the unique intro of our project as a team. It was an enjoyable expirence to work on this project as a team.
@@ -49,7 +49,7 @@ Write about what you are proud of in terms of your visualizer. Keep heading once
 The part of my visualizer I am most proud of is the rectangle visual where is zooms the whole screen in and while zooming out the bouncing circle zooms out with the rectangle. I am also proud of how I was able to sync the rain with the music.
 
 ## Anmar
-Write about what you are proud of in terms of your visualizer. Keep heading once finished.
+I think I'm most proud of the stickmen because I wasnt expecting them to turn out how they did. I'm also very proud of the stars how they shake and orbit around the blackhole and the lines on the blackhole that make a wavee patern when the beat is high.
 
 
 # Preview of Assignmnet
