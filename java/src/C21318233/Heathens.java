@@ -142,7 +142,6 @@ public class Heathens {
         if (m.frameCount >= sixthDrop + 3)
         {
             exitIcon("Exit", m.width - 120, m.height - 120);
-            exitIconHover();
         }
 
         

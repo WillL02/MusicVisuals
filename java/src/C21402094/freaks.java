@@ -75,6 +75,8 @@ public class freaks {
             else {
                 m.background(0);
                 s.backgroundStars();
+                exitIcon("Exit", m.width - 120, m.height - 120);
+                exitIconHover();
 
                 if (m.frameCount >= 3190 && m.frameCount < 6612)// if 53.2 seconds have passed
                 {
@@ -108,6 +110,7 @@ public class freaks {
         {
             m.background(r, g, b);// sky blue background
             exitIcon("Exit", m.width - 120, m.height - 120);
+            exitIconHover();
 
             // when the clouds go off screen they dont come back
             if (m.frameCount >= 900) {
@@ -166,51 +169,6 @@ public class freaks {
 
         } // else
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            // m.background(0);
-            // s.backgroundStars();
-
-            // if (m.frameCount >= 3190 && m.frameCount < 6612)// if 53.2 seconds have passed
-            // {
-            //     bh.displayBlackHole(251, 139, 35);// turn orange
-            //     stickmen[0].displayWhite();
-            // }
-
-            // else if (m.frameCount >= 6612 && m.frameCount < 7718) {
-            //     bh.displayBlackHole(0, 0, 255); // blue
-            //     stickmen[0].displayWhite();
-            // }
-
-            // else if (m.frameCount >= 7718) {
-            //     bh.displayBlackHole(255, 0, 0); // red
-            //     stickmen[0].displayWhite();
-            // } // end if
-            // else {
-            //     if (m.frameCount >= 10200) {
-            //         bh.displayBlackHole(1, 1, 1);
-            //     } // end if
-            //     else {
-            //         bh.displayBlackHole(255, 255, 255);
-            //     } // end else
-
-            // } // end else
-
     }
 
     void exitIcon(String text, float x, float y) {
@@ -218,7 +176,7 @@ public class freaks {
         m.image(m.exit, x, y);
         m.fill(255, 0,0);
         m.textSize(25);
-        m.text(text, x-24, y + 77);
+        m.text(text, x+8, y + 77);
       }
 
       void exitIconHover() {
@@ -229,11 +187,12 @@ public class freaks {
           m.rect(m.width - 92, m.height - 85, 100, 100);
           // Exits the program if EXIT icon is pressed
           if (m.mousePressed) {
-            m.song.pause();
+
+            m.ap.pause();
             m.minim.stop();
             m.frameCount = 0;
             m.cursor(Monitor.ARROW); // Default curser everywhere else
-            //m.LoadComputer();
+            m.LoadComputer();
            
           }
         } else {

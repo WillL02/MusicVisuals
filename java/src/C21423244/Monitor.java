@@ -89,90 +89,77 @@ public class Monitor extends Visual
 
     public void setup()
     {
-        loadFreaks();
+        LoadComputer();
     }
 
-    public void loadFreaks() 
-    {
-        anmar = new freaks(this);
-        //LoadComputer();
-        
-
-        minim = new Minim(this);
-        ap = minim.loadFile("TimmyTrumpet.mp3", 2048);
-        ap.play();
-        ab = ap.mix;
-        rectMode(CORNER);
-    }
-    
 
     public void draw()
     {
-        anmar.render();
-    //     if(visualActive == 0) 
-    //     {
-    //         if(computerStarted == false) {
-    //             drawComputer();
-    //             loadingMode();
+        if(visualActive == 0) 
+        {
+            if(computerStarted == false) {
+                drawComputer();
+                loadingMode();
                 
-    //         } else {
-    //             if(startDone == false) {
-    //                 wait(0);
-    //             }
-    //             startDone = true;
-    //             drawComputer();
-    //             desktopMode();
-    //         }
+            } else {
+                if(startDone == false) {
+                    wait(0);
+                }
+                startDone = true;
+                drawComputer();
+                desktopMode();
+            }
             
             
-    //         //Plays audio once, needs fix
-    //         if(count == 0) 
-    //         {
-    //             startMinim();
-    //             loadAudio("startupSound95.mp3");
-    //             getAudioPlayer().play();
-    //             count++;
-    //         }
+            //Plays audio once, needs fix
+            if(count == 0) 
+            {
+                startMinim();
+                loadAudio("startupSound95.mp3");
+                getAudioPlayer().play();
+                count++;
+            }
             
-    //         iconHover();
-    //     } 
-    //     else if(visualActive == 1)
-    //     {
-    //         mate.render();
-    //     }
-    //     else if(visualActive == 2)
-    //     {
-    //         cruz.render();
-    //     }
-    //     else if(visualActive == 3)
-    //     {
-    //         mate.render();
-    //     }
-    // }
+            iconHover();
+        } 
+        else if(visualActive == 1)
+        {
+            mate.render();
+        }
+        else if(visualActive == 2)
+        {
+            cruz.render();
+        }
+        else if(visualActive == 3)
+        {
+            anmar.render();
+        }
+        
+    }
 
-    // public void iconHover() 
-    // {
-    //     if(mouseX >= 531 && mouseX <= 622 && mouseY >= 86 && mouseY <= 166)
-    //     {
-    //         stroke(0,182,255);
-    //         fill(49,182,255,65);
-    //         rect(531, 86, 91, 50+30);
-    //     }
+    public void iconHover() 
+    {
+        if(mouseX >= 531 && mouseX <= 622 && mouseY >= 86 && mouseY <= 166)
+        {
+            stroke(0,182,255);
+            fill(49,182,255,65);
+            rect(531, 86, 91, 50+30);
+        }
  
-    //     if(mouseX >= 531 && mouseX <= 622 && mouseY >= 176 && mouseY <= 256)
-    //     {
-    //         stroke(0,182,255);
-    //         fill(49,182,255,65);
-    //         rect(531, 176, 91, 50+30);
-    //     }
+        if(mouseX >= 531 && mouseX <= 622 && mouseY >= 176 && mouseY <= 256)
+        {
+            stroke(0,182,255);
+            fill(49,182,255,65);
+            rect(531, 176, 91, 50+30);
+        }
  
-    //     if(mouseX >= 531 && mouseX <= 622 && mouseY >= 266 && mouseY <= 345)
-    //     {
-    //         stroke(0,182,255);
-    //         fill(49,182,255,65);
-    //         rect(531, 266, 91, 50+30);
-    //     }
-    //     stroke(0);
+        if(mouseX >= 531 && mouseX <= 622 && mouseY >= 266 && mouseY <= 345)
+        {
+            stroke(0,182,255);
+            fill(49,182,255,65);
+            rect(531, 266, 91, 50+30);
+        }
+        stroke(0);
     }
 
     public void drawComputer() 
@@ -243,6 +230,7 @@ public class Monitor extends Visual
 
     public void LoadComputer() 
     {
+        
         drawComputer();
         startMinim();
         loadAudio("fanBackground.mp3");
@@ -254,6 +242,18 @@ public class Monitor extends Visual
         colorMode(RGB);
     }
 
+    public void LoadFreaks() 
+    {
+        anmar = new freaks(this);
+        minim = new Minim(this);
+        // song  = minim.loadFile("TimmyTrumpet.mp3", 2048);
+        // song.play();
+        // ab = song.mix;
+        ap = minim.loadFile("TimmyTrumpet.mp3", 2048);
+        ap.play();
+        ab = ap.mix;
+        rectMode(CENTER);
+    }
     public void LoadSafeAndSound() 
     {
         colorMode(HSB);
@@ -420,8 +420,14 @@ public class Monitor extends Visual
 
        if(mouseX >= 531 && mouseX <= 622 && mouseY >= 266 && mouseY <= 345)
        {
-        rect(531, 266, 91, 50+30);
-       }
+            if(alreadyStarted == false) {
+                rect(531, 266, 91, 50+30);
+                LoadFreaks();
+                visualActive = 3;
+                alreadyStarted = true;
+            }
+        }
+    
     }
 
     private void wait(int waitSeconds) 

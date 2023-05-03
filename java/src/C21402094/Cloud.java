@@ -34,7 +34,7 @@ public class Cloud {
         
         anmar.m.noStroke();
         anmar.m.fill(250);
-        anmar.m.rectMode(Monitor.CENTER);
+        // anmar.m.rectMode(Monitor.CENTER);
         anmar.m.ellipse(a, y-h/2, w/2, w/2);
         anmar.m.rect(x, y, w, h, h/2);
     }// end function

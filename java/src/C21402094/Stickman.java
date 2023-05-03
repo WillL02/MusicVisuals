@@ -44,7 +44,7 @@ public class Stickman {
         
     void display()
     {
-        anmar.m.imageMode(Monitor.CENTER); 
+        anmar.m.imageMode(Monitor.CORNER); 
         anmar.m.image(sticks[i], x, y, w, h);
         
         // if index has not reached length and not made it to length yet
