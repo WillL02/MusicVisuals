@@ -33,8 +33,24 @@ My visual is the first one displayed in the Monitor, it's called "Visual1.exe". 
 After being called from the Monitor, the Heathens file is run. My AudioVisual has multiple beat drops (6 in total) in which something in the visual will change. From the start there is a circle and a rain visual that reacts with the song. The circle gets larger and the rain falls faster depending on the song. The first drop of the song changes the color of the background, circle and rain. The second drop starts the rectangle visual where the whole screen zooms in while rectangles are drawn creating the effect of a rectangle slowly becoming smaller. The third drop then starts to zoom the screen out while the rectangle becomes bigger with a circle in the middle of the rectangle reacting to the music. The fourth drop returns to the bouncing circle and rain just as the rectangle is about to fill the screen. The fifth drop is another color change and the final sixth drop flashes the screen white to simulate a lightning strike.
 
 # Anmar
-Write about how your visualizer works here. Remove heading once finished. Write in order of appearance.
+When called from Monitor.java through mouse click, is is the third one displayed called "visual3.exe". When it runs a collction of stickmen objects are randomly placed on the screen and are using a collision detect function to stop them from overlapping. Along with stickmen is cloud objects that are displayed randomly also and also use an Anti overlap function. After a set time to match the first beat drop, the transition to space starts and the clouds and stickmen disappear revealing a black hole that reacts to the music with star objects orbiting around the black hole which also react to the music by shaking and orbit rotation speed increases. The black hole has lines that are behind the black hole and are connected from the centre of the circle to just outside its radius which react to the music too while showing a wave pattern when the beat is high. The lines for the black hole change colour when the beat drops the second time while revealing a single stickman orbiting around the black hole unaffected by the music.
 
+# List of classes/assets
+
+| Class/asset   | Source        |
+| ------------- | ------------- |
+| Monitor.java   | C21423244  |
+| SafeandSound.java  | C21379483  |
+| Mouse.java  | C21379483  |
+| Heathens.java  | C21318233  |
+| Rain.java  | C21318233   |
+| blackhole.java  | C21402094  |
+| Cloud.java  | C21402094  |
+| freaks.java  | C21402094  |
+| Star.java  | C21402094  |
+| Stickman.java  | C21402094  |
+| Star.java  | C21402094  |
+| Stickman.java  | C21402094  |
 
 # What I am most proud of in the assignment
 
@@ -48,8 +64,10 @@ I'm most proud of the creativity of my visual. I love how I stuck with the windo
 The part of my visualizer I am most proud of is the rectangle visual where is zooms the whole screen in and while zooming out the bouncing circle zooms out with the rectangle. I am also proud of how I was able to sync the rain with the music.
 
 ## Anmar
-Write about what you are proud of in terms of your visualizer. Keep heading once finished.
+I think I'm most proud of the stickmen because I wasnt expecting them to turn out how they did. I'm also very proud of the stars how they shake and orbit around the blackhole and the lines on the blackhole that make a wavee patern when the beat is high.
 
+# Screenshots
+here.
 
 # Preview of Assignmnet
 ## Máte
