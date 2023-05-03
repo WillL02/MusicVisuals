@@ -1,8 +1,7 @@
 package C21402094;
 
-
 import C21423244.Monitor;
-import ie.tudublin.*;
+
 
 public class freaks {
     float angle = 0;
