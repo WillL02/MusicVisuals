@@ -3,8 +3,6 @@ package ie.tudublin;
 import C21423244.Monitor;
 import C21318233.Heathens;
 import C21402094.*;
-import example.CubeVisual;
-import example.Test;
 
 public class Main 
 {	
