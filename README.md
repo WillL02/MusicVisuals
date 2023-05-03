@@ -16,86 +16,46 @@ Name: Anmar Saoud
 
 Student Number: C21402094
 
-## Instructions
-- Fork this repository and use it a starter project for your assignment
-- Create a new package named your student number and put all your code in this package.
-- You should start by creating a subclass of ie.tudublin.Visual
-- There is an example visualiser called MyVisual in the example package
-- Check out the WaveForm and AudioBandsVisual for examples of how to call the Processing functions from other classes that are not subclasses of PApplet
 
 # Description of the assignment
+Our groups visualizer is based on an old computer that runs on Windows 95, there are 3 .exe files that clickable. When clicked each .exe file will run its own unique visualizer. The first visualizer "visual1.exe" plays a sped up version of the song "Safe and Sound by Capital Cities". The second visualizer "visual2.exe" plays the song "Heathens by Twenty one pilots". The third and final visualizer "visual3.exe" plays a slowed bass boosted remix of the song "Freaks by Timmy Trumpet".
 
 # Instructions
+Run the program and simply click on any three of the available visualizers once to watch. If you wish to stop at any point press the Exit icon located on the bottom right of the screen and it will bring you back to the computer.
 
 # How it works
+The monitor screen works as a base for all the visualizers to be played.
+
+# Máte
+Write about how your visualizer works here. Remove heading once finished. Write in order of appearance.
+
+# Ciaran
+Write about how your visualizer works here. Remove heading once finished. Write in order of appearance.
+
+# Anmar
+Write about how your visualizer works here. Remove heading once finished. Write in order of appearance.
+
 
 # What I am most proud of in the assignment
 
-# Markdown Tutorial
+## William
+Im most proud of the combination of all the team's work into one working application and the unique intro of our project as a team. It was an enjoyable expirence to work on this project as a team.
 
-This is *emphasis*
+## Mate
+Write about what you are proud of in terms of your visualizer. Keep heading once finished.
 
-This is a bulleted list
+## Ciaran
+Write about what you are proud of in terms of your visualizer. Keep heading once finished.
 
-- Item
-- Item
+## Anmar
+Write about what you are proud of in terms of your visualizer. Keep heading once finished.
 
-This is a numbered list
 
-1. Item
-1. Item
+# Preview of Assignmnet
+## Máte
+Put youtube video here when finished recording and uploading. Remove this sentence after and remove heading.
 
-This is a [hyperlink](http://bryanduggan.org)
 
-# Headings
-## Headings
-#### Headings
-##### Headings
 
-This is code:
-
-```Java
-public void render()
-{
-	ui.noFill();
-	ui.stroke(255);
-	ui.rect(x, y, width, height);
-	ui.textAlign(PApplet.CENTER, PApplet.CENTER);
-	ui.text(text, x + width * 0.5f, y + height * 0.5f);
-}
-```
-
-So is this without specifying the language:
-
-```
-public void render()
-{
-	ui.noFill();
-	ui.stroke(255);
-	ui.rect(x, y, width, height);
-	ui.textAlign(PApplet.CENTER, PApplet.CENTER);
-	ui.text(text, x + width * 0.5f, y + height * 0.5f);
-}
-```
-
-This is an image using a relative URL:
-
-![An image](images/p8.png)
-
-This is an image using an absolute URL:
-
-![A different image](https://bryanduggandotorg.files.wordpress.com/2019/02/infinite-forms-00045.png?w=595&h=&zoom=2)
-
-This is a youtube video:
-
-[![YouTube](http://img.youtube.com/vi/J2kHSSFA4NU/0.jpg)](https://www.youtube.com/watch?v=J2kHSSFA4NU)
-
-This is a table:
-
-| Heading 1 | Heading 2 |
-|-----------|-----------|
-|Some stuff | Some more stuff in this column |
-|Some stuff | Some more stuff in this column |
-|Some stuff | Some more stuff in this column |
-|Some stuff | Some more stuff in this column |
+[![YouTube](http://img.youtube.com/vi/9iVh87XtL_4/0.jpg)](https://www.youtube.com/watch?v=J2kHSSFA4NU)
 
