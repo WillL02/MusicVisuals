@@ -41,13 +41,12 @@ public class freaks {
 
         m.frameRate(60);
         m.frameCount = 0;
-
-        i = 1; 
-
+        i = 1;
     }
 
+
     public void render() {
-        System.out.println(m.frameCount);
+        
         if (m.frameCount >= 960) // if 16 seconds have passed
         {
             if (i < m.height / 30) {
@@ -78,18 +77,18 @@ public class freaks {
                 exitIcon("Exit", m.width - 120, m.height - 120);
                 exitIconHover();
 
-                if (m.frameCount >= 3190 && m.frameCount < 6612)// if 53.2 seconds have passed
+                if (m.frameCount >= 3309 && m.frameCount < 6748)// if 53.2 seconds have passed
                 {
                     bh.displayBlackHole(251, 139, 35);// turn orange
                     stickmen[0].displayWhite();
                 }
 
-                else if (m.frameCount >= 6612 && m.frameCount < 7718) {
+                else if (m.frameCount >= 6748 && m.frameCount < 7828) {
                     bh.displayBlackHole(0, 0, 255); // blue
                     stickmen[0].displayWhite();
                 }
 
-                else if (m.frameCount >= 7718) {
+                else if (m.frameCount >= 7828) {
                     bh.displayBlackHole(255, 0, 0); // red
                     stickmen[0].displayWhite();
                 } // end if

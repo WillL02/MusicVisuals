@@ -24,7 +24,6 @@ public class Heathens {
     float backgroundCol;
     boolean reverse;
 
-
     public Heathens(Monitor m) 
     {
         this.m = m;
@@ -32,6 +31,8 @@ public class Heathens {
         zoomOut = true;
         backgroundCol = 0;
         reverse = false;
+
+        m.frameCount = 0;
     }
 
     public void render() {

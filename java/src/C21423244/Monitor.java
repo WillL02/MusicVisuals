@@ -285,6 +285,13 @@ public class Monitor extends Visual
             mouses[i] = new Mouse(mice[index], random(85, 130), this);
         }
     }
+    public void keyPressed() 
+    {
+        if(keyCode == ' ') 
+        {
+            System.out.println(frameCount);  
+        }
+    }
 
     public void LoadHeathens() 
     {
